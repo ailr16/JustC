@@ -49,3 +49,13 @@ void list_print(list *listHandler){
     }
     printf(" ]\n");
 }
+
+void list_free(list *listHandler){
+    list_node *tmp;
+
+    while(listHandler->head != NULL){
+        tmp = listHandler->head;
+        listHandler->head = listHandler->head->next;
+        free(tmp);
+    }
+}

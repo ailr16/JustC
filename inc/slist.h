@@ -18,5 +18,6 @@ void list_init(list *listHandler);
 void list_prepend(list *listHandler, int data);
 void list_append(list *listHandler, int data);
 void list_print(list *listHandler);
+void list_free(list *listHandler);
 
 #endif
