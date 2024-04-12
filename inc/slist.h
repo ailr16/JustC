@@ -16,6 +16,7 @@ typedef struct _list{
 
 void list_init(list *listHandler);
 void list_prepend(list *listHandler, int data);
+void list_append(list *listHandler, int data);
 void list_print(list *listHandler);
 
 #endif

@@ -5,10 +5,10 @@ list listH;
 int main(void)
 {
     list_init(&listH);
-    list_prepend(&listH, 16);
-    list_prepend(&listH, 18);
-    list_prepend(&listH, 20);
-    list_prepend(&listH, 16);
+    
+    for(int i = 16; i <= 128; i += 16){
+        list_append(&listH, i);
+    }
 
     list_print(&listH);
 
