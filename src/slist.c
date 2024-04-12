@@ -11,10 +11,15 @@ void list_prepend(list *listHandler, int data){
     temp = malloc(sizeof(list_node));
     temp->data = data;
 
-    if(listHandler->head == NULL)temp->next = NULL;
-    else temp->next = listHandler->head;
-
-    listHandler->head = temp;
+    if(listHandler->head == NULL){
+        temp->next = NULL;
+        listHandler->head = temp;
+        listHandler->tail = temp;
+    }
+    else{
+        temp->next = listHandler->head;
+        listHandler->head = temp;
+    }
 }
 
 void list_append(list *listHandler, int data){
