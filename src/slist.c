@@ -52,14 +52,37 @@ void list_append(list *listHandler, int data){
   Delete and return last node
 */
 int list_pop(list *listHandler){
+    list_node *temp;
+    int returnValue;
 
+    temp = listHandler->head;
+    returnValue = listHandler->tail->data;
+
+    while(temp->next != listHandler->tail){
+        temp = temp->next;
+    }
+
+    free(temp->next);
+    temp->next = NULL;
+    listHandler->tail = temp;
+
+    return returnValue;
 }
 
 /*
   Delete and return first node
 */
 int list_popFront(list *listHandler){
-    
+    list_node *temp;
+    int returnValue;
+
+    temp = listHandler->head;
+    returnValue = listHandler->head->data;
+
+    listHandler->head = listHandler->head->next;
+    free(temp);
+
+    return returnValue;
 }
 
 /*
