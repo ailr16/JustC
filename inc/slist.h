@@ -4,24 +4,24 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-typedef struct _list_node {
+typedef struct _slist_node {
     int data;
-    struct _list_node *next;
-} list_node;
+    struct _slist_node *next;
+} slist_node;
 
-typedef struct _list{
-    list_node *head;
-    list_node *tail;
-} list;
+typedef struct _slist{
+    slist_node *head;
+    slist_node *tail;
+} slist;
 
-void list_init(list *listHandler);
-void list_insert(list *listHandler, int index, int data);
-void list_remove(list *listHandler, int index);
-void list_prepend(list *listHandler, int data);
-void list_append(list *listHandler, int data);
-int list_pop(list *listHandler);
-int list_popFront(list *listHandler);
-void list_print(list *listHandler);
-void list_free(list *listHandler);
+void slist_init(slist *listHandler);
+void slist_insert(slist *listHandler, int index, int data);
+void slist_remove(slist *listHandler, int index);
+void slist_prepend(slist *listHandler, int data);
+void slist_append(slist *listHandler, int data);
+int  slist_pop(slist *listHandler);
+int  slist_popFront(slist *listHandler);
+void slist_print(slist *listHandler);
+void slist_free(slist *listHandler);
 
 #endif
