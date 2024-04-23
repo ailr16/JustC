@@ -1,28 +1,28 @@
-#ifndef SLIST_H
-#define SLIST_H
+#ifndef DLIST_H
+#define DLIST_H
 
-#define LIST_HEAD_INIT( name ) { &(name), &(name) }
-#define LIST_HEAD( name ) \
-            list_head name = LIST_HEAD_INIT( name )
+#include <stdlib.h>
+#include <stdio.h>
 
-
-typedef struct _list_head{
-    struct _list_head *next;
-    struct _list_head *prev;
-} list_head;
-
-
-typedef struct _list_element {
+typedef struct _dlist_node {
     int data;
-    list_head list;
-} list_element;
+    struct _dlist_node *prev;
+    struct _dlist_node *next;
+} dlist_node;
 
+typedef struct _dlist{
+    dlist_node *head;
+    dlist_node *tail;
+} dlist;
 
-static inline void INIT_LIST_HEAD( list_head *list )
-{
-    list->next = list;
-    list->prev = list;
-}
-
+void dlist_init(dlist *listHandler);
+void dlist_insert(dlist *listHandler, int index, int data);
+void dlist_remove(dlist *listHandler, int index);
+void dlist_prepend(dlist *listHandler, int data);
+void dlist_append(dlist *listHandler, int data);
+int  dlist_pop(dlist *listHandler);
+int  dlist_popFront(dlist *listHandler);
+void dlist_print(dlist *listHandler);
+void dlist_free(dlist *listHandler);
 
 #endif

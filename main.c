@@ -1,11 +1,11 @@
-#include "slist.h"
+#include "dlist.h"
 
-slist listH;
+dlist listH;
 
 int main(void)
 {
-    slist_init(&listH);
-
+    dlist_init(&listH);
+    /*
     slist_prepend(&listH, 16);   //[ 16 ]
     slist_append(&listH, 32);    //[ 16 32 ]
     slist_prepend(&listH, 18);   //[ 18 16 32 ]
@@ -29,6 +29,6 @@ int main(void)
     slist_print(&listH);
 
     slist_free(&listH);
-
+    */
     return 0;
 }
