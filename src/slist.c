@@ -1,10 +1,16 @@
 #include "slist.h"
 
+/*
+  Initialize list
+*/
 void list_init(list *listHandler){
     listHandler->head = NULL;
     listHandler->tail = NULL;
 }
 
+/*
+  Add node to front of the list
+*/
 void list_prepend(list *listHandler, int data){
     list_node *temp;
 
@@ -22,6 +28,9 @@ void list_prepend(list *listHandler, int data){
     }
 }
 
+/*
+  Add node to end of the list
+*/
 void list_append(list *listHandler, int data){
     list_node *temp;
 
@@ -39,6 +48,23 @@ void list_append(list *listHandler, int data){
     }
 }
 
+/*
+  Delete and return last node
+*/
+int list_pop(list *listHandler){
+
+}
+
+/*
+  Delete and return first node
+*/
+int list_popFront(list *listHandler){
+    
+}
+
+/*
+  Print all the nodes in a list
+*/
 void list_print(list *listHandler){
     list_node *i = listHandler->head;
 
@@ -50,6 +76,9 @@ void list_print(list *listHandler){
     printf(" ]\n");
 }
 
+/*
+  Delete all nodes and free memory
+*/
 void list_free(list *listHandler){
     list_node *tmp;
 
