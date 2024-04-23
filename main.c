@@ -21,6 +21,13 @@ int main(void)
     list_insert(&listH, 8, 699);    //[ 99 55 18 66 16 32 32 64 699 299]
     list_print(&listH);
 
+    list_remove(&listH, 0);         //[ 55 18 66 16 32 32 64 699 299]
+    list_remove(&listH, 2);         //[ 55 18 16 32 32 64 699 299]
+    list_remove(&listH, 40);        //[ 55 18 16 32 32 64 699 ]
+    list_remove(&listH, 40);        //[ 55 18 16 32 32 64 ]
+    list_remove(&listH, 4);         //[ 55 18 16 32 64 ]
+    list_print(&listH);
+
     list_free(&listH);
 
     return 0;

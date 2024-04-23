@@ -48,8 +48,33 @@ void list_insert(list *listHandler, int index, int data){
 /*
   Remove the specified index node
 */
-void list_remove(list *listHandler, int index, int data){
+void list_remove(list *listHandler, int index){
+    list_node *temp;
+    list_node *deleteNode;
 
+    temp = listHandler->head;
+
+    if(index == 0){
+        listHandler->head = listHandler->head->next;
+        free(temp);
+    }
+    else{
+        int i = 0;
+        while(i != (index - 1) && temp->next->next != NULL){
+            i++;
+            temp = temp->next;
+        }
+        if(temp->next->next == NULL){
+            deleteNode = temp->next;
+            temp->next = NULL;
+            free(deleteNode);
+        }
+        else{
+            deleteNode = temp->next;
+            temp->next = deleteNode->next;
+            free(deleteNode);
+        }
+    }
 }
 
 /*

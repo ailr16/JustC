@@ -16,7 +16,7 @@ typedef struct _list{
 
 void list_init(list *listHandler);
 void list_insert(list *listHandler, int index, int data);
-void list_remove(list *listHandler, int index, int data);
+void list_remove(list *listHandler, int index);
 void list_prepend(list *listHandler, int data);
 void list_append(list *listHandler, int data);
 int list_pop(list *listHandler);
