@@ -9,6 +9,50 @@ void list_init(list *listHandler){
 }
 
 /*
+  Add node at the specified index
+*/
+void list_insert(list *listHandler, int index, int data){
+    list_node *temp;
+    list_node *new;
+
+    temp = listHandler->head;
+
+    if(index == 0){
+        new = malloc(sizeof(list_node));
+        new->data = data;
+        new->next = temp;
+        listHandler->head = new;
+    }
+    else{
+        int i = 0;
+        while(i != (index - 1) && temp->next != NULL){
+            i++;
+            temp = temp->next;
+        }
+        if(temp->next == NULL){
+            new = malloc(sizeof(list_node));
+            new->data = data;
+            new->next = NULL;
+            temp->next = new;
+            listHandler->tail = new;
+        }
+        else{
+            new = malloc(sizeof(list_node));
+            new->data = data;
+            new->next = temp->next;
+            temp->next = new;
+        }
+    }
+}
+
+/*
+  Remove the specified index node
+*/
+void list_remove(list *listHandler, int index, int data){
+
+}
+
+/*
   Add node to front of the list
 */
 void list_prepend(list *listHandler, int data){
