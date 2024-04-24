@@ -14,6 +14,12 @@ int main(void)
 
     dlist_print(&listH);
 
+    printf("POP %d\n", dlist_pop(&listH));
+    printf("POPF %d\n", dlist_popFront(&listH));
+    printf("POP %d\n", dlist_pop(&listH));
+    printf("POPF %d\n", dlist_popFront(&listH));
+    dlist_print(&listH);
+
     dlist_free(&listH);
     /*
     slist_insert(&listH, 0, 99);     //[ 99 18 16 32 32 64 ]

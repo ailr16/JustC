@@ -69,15 +69,37 @@ void dlist_append(dlist *listHandler, int data){
 /*
   Remove and return last node
 */
-int  dlist_pop(dlist *listHandler){
+int dlist_pop(dlist *listHandler){
+	dlist_node *temp;
+	int returnValue;
 
+	temp = listHandler->tail;
+	returnValue = listHandler->tail->data;
+
+	listHandler->tail->prev->next = NULL;
+	listHandler->tail = listHandler->tail->prev;
+
+	free(temp);
+
+	return returnValue;
 }
 
 /*
   Remove and return first node
 */
-int  dlist_popFront(dlist *listHandler){
+int dlist_popFront(dlist *listHandler){
+	dlist_node *temp;
+	int returnValue;
 
+	temp = listHandler->head;
+	returnValue = listHandler->head->data;
+
+	listHandler->head->next->prev = NULL;
+	listHandler->head = listHandler->head->next;
+
+	free(temp);
+
+	return returnValue;
 }
 
 /*
