@@ -28,11 +28,10 @@ void dlist_insert(dlist *listHandler, int index, int data){
 	}
 	else{
 		iterator = listHandler->head;
-		while(nodeCounter != index && iterator->next != NULL){
+		while(nodeCounter < (index - 1) && iterator->next != NULL){
 			iterator = iterator->next;
 			nodeCounter++;
 		}
-		//printf("LAST %d\n", iterator->data);
 		if(iterator->next == NULL){
 			iterator->next = temp;
 			temp->prev = iterator;
@@ -40,6 +39,7 @@ void dlist_insert(dlist *listHandler, int index, int data){
 			listHandler->tail = temp;
 		}
 		else{
+			iterator = iterator->next;
 			temp->prev = iterator->prev;
 			temp->next = iterator;
 			temp->prev->next = temp;
@@ -52,7 +52,41 @@ void dlist_insert(dlist *listHandler, int index, int data){
   Remove specified node index 
 */
 void dlist_remove(dlist *listHandler, int index){
+	dlist_node *nodeToDelete;
+	dlist_node *iterator;
+	int nodeCounter = 0;
 
+	if(index == 0){
+		nodeToDelete = listHandler->head;
+
+		listHandler->head = listHandler->head->next;
+		listHandler->head->prev = NULL;
+
+		free(nodeToDelete);
+	}
+	else{
+		iterator = listHandler->head;
+		while(nodeCounter != index && iterator->next != NULL){
+			iterator = iterator->next;
+			nodeCounter++;
+		}
+		if(iterator->next == NULL){
+			nodeToDelete = listHandler->tail;
+
+			listHandler->tail = listHandler->tail->prev;
+			listHandler->tail->next = NULL;
+
+			free(nodeToDelete);
+		}
+		else{
+			nodeToDelete = iterator;
+
+			iterator->prev->next = iterator->next;
+			iterator->next->prev = iterator->prev;
+
+			free(nodeToDelete);
+		}
+	}
 }
 
 /*
