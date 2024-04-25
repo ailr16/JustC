@@ -12,7 +12,40 @@ void dlist_init(dlist *listHandler){
   Insert node at specified index 
 */
 void dlist_insert(dlist *listHandler, int index, int data){
-    
+    dlist_node *temp;
+	dlist_node *iterator;
+	int nodeCounter = 0;
+
+	temp = malloc(sizeof(dlist_node));
+	temp->data = data;
+
+	if(index == 0){
+		temp->prev = NULL;
+		temp->next = listHandler->head;
+
+		listHandler->head->prev = temp;
+		listHandler->head = temp;
+	}
+	else{
+		iterator = listHandler->head;
+		while(nodeCounter != index && iterator->next != NULL){
+			iterator = iterator->next;
+			nodeCounter++;
+		}
+		//printf("LAST %d\n", iterator->data);
+		if(iterator->next == NULL){
+			iterator->next = temp;
+			temp->prev = iterator;
+			temp->next = NULL;
+			listHandler->tail = temp;
+		}
+		else{
+			temp->prev = iterator->prev;
+			temp->next = iterator;
+			temp->prev->next = temp;
+			temp->next->prev = temp;
+		}
+	}
 }
 
 /*
