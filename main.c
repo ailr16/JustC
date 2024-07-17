@@ -1,11 +1,75 @@
 #include "dlist.h"
 #include "slist.h"
+#include "cbuffer.h"
 
-dlist dlistH;
-slist slistH;
+void slist_test(void);
+void dlist_test(void);
+
+#define BUFFER_SIZE 6
+
+int a[BUFFER_SIZE];
+
+cbuffer buffer1 = {
+    .array = a,
+};
 
 int main(void)
-{
+{   
+    int popped_value = 0;
+
+    cbuffer_init( &buffer1, BUFFER_SIZE);   //_ _ _ _ _ _
+    printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
+
+    cbuffer_push( &buffer1, (int)1 );   //1 _ _ _ _ _
+    printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
+    cbuffer_push( &buffer1, (int)2 );   //1 2 _ _ _ _
+    printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
+    cbuffer_push( &buffer1, (int)3 );   //1 2 3 _ _ _
+    printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
+    cbuffer_push( &buffer1, (int)4 );   //1 2 3 4 _ _
+    printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
+    cbuffer_push( &buffer1, (int)5 );   //1 2 3 4 5 _
+    printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
+    cbuffer_push( &buffer1, (int)6 );   //1 2 3 4 5 6
+    printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
+
+    if(cbuffer_pop( &buffer1, &popped_value ) == 0){
+        printf( "popped_value={%d}\n", popped_value);    //1 2 3 4 5 6
+    }
+    printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
+
+    cbuffer_push( &buffer1, (int)7 );   //7 2 3 4 5 6
+    printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
+    
+    /*
+    if(cbuffer_pop( &buffer1, &popped_value ) == 0){
+        printf( "popped_value={%d}\n", popped_value);    //1 2 3 4 5 6
+    }
+    printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
+
+    if(cbuffer_pop( &buffer1, &popped_value ) == 0){
+        printf( "popped_value={%d}\n", popped_value);    //_ _ 3 _ _ _
+    }
+    printf( "head={%d} tail={%d}\n", buffer1.head, buffer1.tail);
+
+    if(cbuffer_pop( &buffer1, &popped_value ) == 0){
+        printf( "popped_value={%d}\n", popped_value);    //_ _ _ _ _ _
+    }
+    printf( "head={%d} tail={%d}\n", buffer1.head, buffer1.tail);
+
+    if(cbuffer_pop( &buffer1, &popped_value ) == 0){
+        printf( "popped_value={%d}\n", popped_value);    //_ _ _ _ _ _
+    }
+    printf( "head={%d} tail={%d}\n", buffer1.head, buffer1.tail);
+
+    */
+    cbuffer_print( &buffer1 );
+    return 0;
+}
+
+void slist_test(void){
+    slist slistH;
+
     printf("------------slist------------\n");
     slist_init(&slistH);
 
@@ -34,7 +98,11 @@ int main(void)
     slist_print(&slistH);
 
     slist_free(&slistH);
-    
+}
+
+void dlist_test(void){
+    dlist dlistH;
+
     printf("\n------------dlist------------\n");
     dlist_init(&dlistH);
 
@@ -62,5 +130,4 @@ int main(void)
     dlist_print(&dlistH);
 
     dlist_free(&dlistH);
-    return 0;
 }
