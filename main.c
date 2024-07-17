@@ -1,6 +1,6 @@
 #include "dlist.h"
 #include "slist.h"
-#include "cbuffer.h"
+#include "rbuffer.h"
 
 void slist_test(void);
 void dlist_test(void);
@@ -9,7 +9,7 @@ void dlist_test(void);
 
 int a[BUFFER_SIZE];
 
-cbuffer buffer1 = {
+rbuffer buffer1 = {
     .array = a,
 };
 
@@ -17,28 +17,28 @@ int main(void)
 {   
     int popped_value = 0;
 
-    cbuffer_init( &buffer1, BUFFER_SIZE);   //_ _ _ _ _ _
+    rbuffer_init( &buffer1, BUFFER_SIZE);   //_ _ _ _ _ _
     printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
 
-    cbuffer_push( &buffer1, (int)1 );   //1 _ _ _ _ _
+    rbuffer_push( &buffer1, (int)1 );   //1 _ _ _ _ _
     printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
-    cbuffer_push( &buffer1, (int)2 );   //1 2 _ _ _ _
+    rbuffer_push( &buffer1, (int)2 );   //1 2 _ _ _ _
     printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
-    cbuffer_push( &buffer1, (int)3 );   //1 2 3 _ _ _
+    rbuffer_push( &buffer1, (int)3 );   //1 2 3 _ _ _
     printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
-    cbuffer_push( &buffer1, (int)4 );   //1 2 3 4 _ _
+    rbuffer_push( &buffer1, (int)4 );   //1 2 3 4 _ _
     printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
-    cbuffer_push( &buffer1, (int)5 );   //1 2 3 4 5 _
+    rbuffer_push( &buffer1, (int)5 );   //1 2 3 4 5 _
     printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
-    cbuffer_push( &buffer1, (int)6 );   //1 2 3 4 5 6
+    rbuffer_push( &buffer1, (int)6 );   //1 2 3 4 5 6
     printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
 
-    if(cbuffer_pop( &buffer1, &popped_value ) == 0){
+    if(rbuffer_pop( &buffer1, &popped_value ) == 0){
         printf( "popped_value={%d}\n", popped_value);    //1 2 3 4 5 6
     }
     printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
 
-    cbuffer_push( &buffer1, (int)7 );   //7 2 3 4 5 6
+    rbuffer_push( &buffer1, (int)7 );   //7 2 3 4 5 6
     printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
     
     /*
