@@ -15,55 +15,34 @@ rbuffer buffer1 = {
 
 int main(void)
 {   
-    int popped_value = 0;
+    rbufferStatus status = RBUFFER_OK;
+    int getted = 0;
 
     rbuffer_init( &buffer1, BUFFER_SIZE);   //_ _ _ _ _ _
-    printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
 
-    rbuffer_push( &buffer1, (int)1 );   //1 _ _ _ _ _
-    printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
-    rbuffer_push( &buffer1, (int)2 );   //1 2 _ _ _ _
-    printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
-    rbuffer_push( &buffer1, (int)3 );   //1 2 3 _ _ _
-    printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
-    rbuffer_push( &buffer1, (int)4 );   //1 2 3 4 _ _
-    printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
-    rbuffer_push( &buffer1, (int)5 );   //1 2 3 4 5 _
-    printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
-    rbuffer_push( &buffer1, (int)6 );   //1 2 3 4 5 6
-    printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
+    status = rbuffer_put( &buffer1, 1 );
+    status = rbuffer_put( &buffer1, 2 );
+    status = rbuffer_put( &buffer1, 4 );
+    status = rbuffer_put( &buffer1, 8 );
+    status = rbuffer_put( &buffer1, 16 );
+    status = rbuffer_put( &buffer1, 32 );
+    status = rbuffer_put( &buffer1, 64 );
 
-    if(rbuffer_pop( &buffer1, &popped_value ) == 0){
-        printf( "popped_value={%d}\n", popped_value);    //1 2 3 4 5 6
-    }
-    printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
+    status = rbuffer_get( &buffer1, &getted );
+    status = rbuffer_get( &buffer1, &getted );
+    status = rbuffer_get( &buffer1, &getted );
 
-    rbuffer_push( &buffer1, (int)7 );   //7 2 3 4 5 6
-    printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
-    
-    /*
-    if(cbuffer_pop( &buffer1, &popped_value ) == 0){
-        printf( "popped_value={%d}\n", popped_value);    //1 2 3 4 5 6
-    }
-    printf( "head={%d} tail={%d} status={%d}\n", buffer1.head, buffer1.tail, buffer1.status);
+    status = rbuffer_put( &buffer1, 64 );
+    status = rbuffer_get( &buffer1, &getted );
+    status = rbuffer_get( &buffer1, &getted );
+    status = rbuffer_get( &buffer1, &getted );
+    status = rbuffer_get( &buffer1, &getted );
+    status = rbuffer_get( &buffer1, &getted );
+    status = rbuffer_put( &buffer1, 128 );
+    status = rbuffer_get( &buffer1, &getted );
 
-    if(cbuffer_pop( &buffer1, &popped_value ) == 0){
-        printf( "popped_value={%d}\n", popped_value);    //_ _ 3 _ _ _
-    }
-    printf( "head={%d} tail={%d}\n", buffer1.head, buffer1.tail);
+    status = rbuffer_flush( &buffer1 );
 
-    if(cbuffer_pop( &buffer1, &popped_value ) == 0){
-        printf( "popped_value={%d}\n", popped_value);    //_ _ _ _ _ _
-    }
-    printf( "head={%d} tail={%d}\n", buffer1.head, buffer1.tail);
-
-    if(cbuffer_pop( &buffer1, &popped_value ) == 0){
-        printf( "popped_value={%d}\n", popped_value);    //_ _ _ _ _ _
-    }
-    printf( "head={%d} tail={%d}\n", buffer1.head, buffer1.tail);
-
-    */
-    cbuffer_print( &buffer1 );
     return 0;
 }
 
