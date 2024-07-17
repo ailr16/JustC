@@ -6,6 +6,7 @@ CC = gcc
 SRCS := main.c
 SRCS += src/dlist.c
 SRCS += src/slist.c
+SRCS += src/cbuffer.c
 
 INC_DIR := inc
 
