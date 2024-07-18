@@ -1,0 +1,1 @@
+add_library(justclib dlist.c rbuffer.c slist.c)

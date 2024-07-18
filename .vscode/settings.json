@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "*.c": "c",
-        "dlist.h": "c"
+        "dlist.h": "c",
+        "gtest.h": "c"
     }
 }

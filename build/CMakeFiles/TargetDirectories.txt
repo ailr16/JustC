@@ -1,0 +1,13 @@
+/home/ailr16/Documents/GitHub/JustC/build/CMakeFiles/justc.dir
+/home/ailr16/Documents/GitHub/JustC/build/CMakeFiles/justcTEST.dir
+/home/ailr16/Documents/GitHub/JustC/build/CMakeFiles/test.dir
+/home/ailr16/Documents/GitHub/JustC/build/CMakeFiles/edit_cache.dir
+/home/ailr16/Documents/GitHub/JustC/build/CMakeFiles/rebuild_cache.dir
+/home/ailr16/Documents/GitHub/JustC/build/src/CMakeFiles/justclib.dir
+/home/ailr16/Documents/GitHub/JustC/build/src/CMakeFiles/test.dir
+/home/ailr16/Documents/GitHub/JustC/build/src/CMakeFiles/edit_cache.dir
+/home/ailr16/Documents/GitHub/JustC/build/src/CMakeFiles/rebuild_cache.dir
+/home/ailr16/Documents/GitHub/JustC/build/tests/CMakeFiles/testlib.dir
+/home/ailr16/Documents/GitHub/JustC/build/tests/CMakeFiles/test.dir
+/home/ailr16/Documents/GitHub/JustC/build/tests/CMakeFiles/edit_cache.dir
+/home/ailr16/Documents/GitHub/JustC/build/tests/CMakeFiles/rebuild_cache.dir
