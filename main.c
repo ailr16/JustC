@@ -4,46 +4,83 @@
 
 void slist_test(void);
 void dlist_test(void);
+void rbuffer_test(void);
 
 #define BUFFER_SIZE 6
 
 int a[BUFFER_SIZE];
 
-rbuffer buffer1 = {
-    .array = a,
-};
+rbuffer buffer1;
 
 int main(void)
 {   
+    rbuffer_test();
+    return 0;
+}
+
+void rbuffer_test(void){
     rbufferStatus status = RBUFFER_OK;
     int getted = 0;
 
-    rbuffer_init( &buffer1, BUFFER_SIZE);   //_ _ _ _ _ _
+    rbuffer_init( &buffer1, BUFFER_SIZE, a);
 
-    status = rbuffer_put( &buffer1, 1 );
-    status = rbuffer_put( &buffer1, 2 );
-    status = rbuffer_put( &buffer1, 4 );
-    status = rbuffer_put( &buffer1, 8 );
-    status = rbuffer_put( &buffer1, 16 );
-    status = rbuffer_put( &buffer1, 32 );
+    for(int i = 1; i <= 64; i<<=1){
+        /*
+          This attempts to store 1, 2, 4, 8, 16, 32 and 64 values
+          but only will save 1, 2, 4, 8, 16 and 32
+        */
+        (void)rbuffer_put( &buffer1, i );
+    }
+
+
+    status = rbuffer_get( &buffer1, &getted );
+    printf("%d ", getted);
+
+    status = rbuffer_get( &buffer1, &getted );
+    printf("%d ", getted);
+
+    status = rbuffer_get( &buffer1, &getted );
+    printf("%d ", getted);
+
+    //Add value 64 to buffer
     status = rbuffer_put( &buffer1, 64 );
 
     status = rbuffer_get( &buffer1, &getted );
-    status = rbuffer_get( &buffer1, &getted );
-    status = rbuffer_get( &buffer1, &getted );
+    printf("%d ", getted);
 
-    status = rbuffer_put( &buffer1, 64 );
     status = rbuffer_get( &buffer1, &getted );
+    printf("%d ", getted);
+
     status = rbuffer_get( &buffer1, &getted );
+    printf("%d ", getted);
+
     status = rbuffer_get( &buffer1, &getted );
+    printf("%d ", getted);
+
     status = rbuffer_get( &buffer1, &getted );
-    status = rbuffer_get( &buffer1, &getted );
+    printf("%d ", getted);
+
     status = rbuffer_put( &buffer1, 128 );
     status = rbuffer_get( &buffer1, &getted );
+    printf("%d ", getted);
 
-    status = rbuffer_flush( &buffer1 );
+    status = rbuffer_put( &buffer1, 256 );
+    status = rbuffer_put( &buffer1, 512 );
 
-    return 0;
+    status = rbuffer_get( &buffer1, &getted );
+    printf("%d ", getted);
+
+    status = rbuffer_get( &buffer1, &getted );
+    printf("%d ", getted);
+
+    status = rbuffer_get( &buffer1, &getted );
+    printf("%d\n", getted);
+    
+    //Expected output 1 2 4 8 16 32 64 64 128 256 512 512
+
+    printf("%d\n", rbuffer_flush( &buffer1 ));
+    //Expected output 0
+
 }
 
 void slist_test(void){

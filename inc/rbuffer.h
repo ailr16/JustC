@@ -5,9 +5,9 @@
 #include <stdio.h>
 
 typedef enum _rbuffer_status{
-    RBUFFER_OK    = 1,
-    RBUFFER_FULL  = 2,
-    RBUFFER_EMPTY = 4
+    RBUFFER_OK    = 0,
+    RBUFFER_FULL  = 1,
+    RBUFFER_EMPTY = 2
 } rbufferStatus;
 
 typedef struct _rbuffer{
@@ -19,7 +19,7 @@ typedef struct _rbuffer{
     rbufferStatus status;
 } rbuffer;
 
-void rbuffer_init( rbuffer *buffer, int size);
+void rbuffer_init( rbuffer *buffer, int size, int *array);
 rbufferStatus rbuffer_put( rbuffer *buffer, int value );
 rbufferStatus rbuffer_get( rbuffer *buffer, int *value );
 rbufferStatus rbuffer_getStatus( rbuffer *buffer );

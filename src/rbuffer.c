@@ -2,7 +2,8 @@
 
 void rbuffer_checkStatus( rbuffer *buffer );
 
-void rbuffer_init( rbuffer *buffer, int size ){
+void rbuffer_init( rbuffer *buffer, int size, int *array ){
+    buffer->array = array;
     buffer->head = 0;
     buffer->tail = 0;
     buffer->size = size;
