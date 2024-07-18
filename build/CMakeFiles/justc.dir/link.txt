@@ -1,1 +1,0 @@
-/usr/bin/cc CMakeFiles/justc.dir/main.c.o -o justc  src/libjustclib.a 

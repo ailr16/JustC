@@ -1,2 +1,0 @@
-/usr/bin/ar qc libjustclib.a CMakeFiles/justclib.dir/dlist.c.o CMakeFiles/justclib.dir/rbuffer.c.o CMakeFiles/justclib.dir/slist.c.o
-/usr/bin/ranlib libjustclib.a
