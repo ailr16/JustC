@@ -3,45 +3,74 @@
 /*
   Initialize list
 */
-void Slist_init(Slist *listHandler){
+SlistStatus Slist_init(Slist *listHandler){
     listHandler->head = NULL;
-    listHandler->tail = NULL;
+
+    return SLIST_OK;
 }
 
 /*
   Add node at the specified index
 */
-void Slist_insert(Slist *listHandler, int index, int data){
+SlistStatus Slist_insert(Slist *listHandler, int index, int data){
     SlistNode *temp;
     SlistNode *new;
+    
+    if( index == 0 ){
+        // Insert at the beggining
+        temp = listHandler->head;
 
-    temp = listHandler->head;
+        new = (SlistNode*)malloc( sizeof(SlistNode) );
+        if( new == NULL ) return SLIST_ERROR;
 
-    if(index == 0){
-        new = malloc(sizeof(SlistNode));
         new->data = data;
         new->next = temp;
+
         listHandler->head = new;
+
+        return SLIST_OK;
     }
-    else{
-        int i = 0;
-        while(i != (index - 1) && temp->next != NULL){
-            i++;
+    else if( index == -1 ){
+        // Insert at the end
+        temp = listHandler->head;
+
+        while( temp->next != NULL ){
             temp = temp->next;
         }
-        if(temp->next == NULL){
-            new = malloc(sizeof(SlistNode));
-            new->data = data;
-            new->next = NULL;
-            temp->next = new;
-            listHandler->tail = new;
+
+        new = (SlistNode*)malloc( sizeof(SlistNode) );
+        if( new == NULL ) return SLIST_ERROR;
+
+        new->data = data;
+        new->next = NULL;
+
+        temp->next = new;
+
+        return SLIST_OK;
+    }
+    else{
+        // Any other index
+        temp = listHandler->head;
+        int count = 0;
+
+        if( index < -1 ){
+            return SLIST_ERROR;
         }
-        else{
-            new = malloc(sizeof(SlistNode));
-            new->data = data;
-            new->next = temp->next;
-            temp->next = new;
+
+        while( temp->next != NULL ){
+            count++;
+            if( count >= index ) break;
+            temp = temp->next;
         }
+
+        new = (SlistNode*)malloc( sizeof(SlistNode) );
+        if( new == NULL ) return SLIST_ERROR;
+
+        new->data = data;
+        new->next = temp->next;
+
+        temp->next = new;
+        return SLIST_OK;
     }
 }
 
@@ -49,109 +78,7 @@ void Slist_insert(Slist *listHandler, int index, int data){
   Remove the specified index node
 */
 void Slist_remove(Slist *listHandler, int index){
-    SlistNode *temp;
-    SlistNode *deleteNode;
-
-    temp = listHandler->head;
-
-    if(index == 0){
-        listHandler->head = listHandler->head->next;
-        free(temp);
-    }
-    else{
-        int i = 0;
-        while(i != (index - 1) && temp->next->next != NULL){
-            i++;
-            temp = temp->next;
-        }
-        if(temp->next->next == NULL){
-            deleteNode = temp->next;
-            temp->next = NULL;
-            free(deleteNode);
-        }
-        else{
-            deleteNode = temp->next;
-            temp->next = deleteNode->next;
-            free(deleteNode);
-        }
-    }
-}
-
-/*
-  Add node to front of the list
-*/
-void Slist_prepend(Slist *listHandler, int data){
-    SlistNode *temp;
-
-    temp = malloc(sizeof(SlistNode));
-    temp->data = data;
-
-    if(listHandler->head == NULL){
-        temp->next = NULL;
-        listHandler->head = temp;
-        listHandler->tail = temp;
-    }
-    else{
-        temp->next = listHandler->head;
-        listHandler->head = temp;
-    }
-}
-
-/*
-  Add node to end of the list
-*/
-void Slist_append(Slist *listHandler, int data){
-    SlistNode *temp;
-
-    temp = malloc(sizeof(SlistNode));
-    temp->data = data;
-    temp->next = NULL;
     
-    if(listHandler->head == NULL){
-        listHandler->head = temp;
-        listHandler->tail = temp;
-    }
-    else{
-        listHandler->tail->next = temp;
-        listHandler->tail = temp;
-    }
-}
-
-/*
-  Delete and return last node
-*/
-int Slist_pop(Slist *listHandler){
-    SlistNode *temp;
-    int returnValue;
-
-    temp = listHandler->head;
-    returnValue = listHandler->tail->data;
-
-    while(temp->next != listHandler->tail){
-        temp = temp->next;
-    }
-
-    free(temp->next);
-    temp->next = NULL;
-    listHandler->tail = temp;
-
-    return returnValue;
-}
-
-/*
-  Delete and return first node
-*/
-int Slist_popFront(Slist *listHandler){
-    SlistNode *temp;
-    int returnValue;
-
-    temp = listHandler->head;
-    returnValue = listHandler->head->data;
-
-    listHandler->head = listHandler->head->next;
-    free(temp);
-
-    return returnValue;
 }
 
 /*
