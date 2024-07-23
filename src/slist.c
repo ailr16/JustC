@@ -3,7 +3,7 @@
 /*
   Initialize list
 */
-void slist_init(slist *listHandler){
+void Slist_init(Slist *listHandler){
     listHandler->head = NULL;
     listHandler->tail = NULL;
 }
@@ -11,14 +11,14 @@ void slist_init(slist *listHandler){
 /*
   Add node at the specified index
 */
-void slist_insert(slist *listHandler, int index, int data){
-    slist_node *temp;
-    slist_node *new;
+void Slist_insert(Slist *listHandler, int index, int data){
+    SlistNode *temp;
+    SlistNode *new;
 
     temp = listHandler->head;
 
     if(index == 0){
-        new = malloc(sizeof(slist_node));
+        new = malloc(sizeof(SlistNode));
         new->data = data;
         new->next = temp;
         listHandler->head = new;
@@ -30,14 +30,14 @@ void slist_insert(slist *listHandler, int index, int data){
             temp = temp->next;
         }
         if(temp->next == NULL){
-            new = malloc(sizeof(slist_node));
+            new = malloc(sizeof(SlistNode));
             new->data = data;
             new->next = NULL;
             temp->next = new;
             listHandler->tail = new;
         }
         else{
-            new = malloc(sizeof(slist_node));
+            new = malloc(sizeof(SlistNode));
             new->data = data;
             new->next = temp->next;
             temp->next = new;
@@ -48,9 +48,9 @@ void slist_insert(slist *listHandler, int index, int data){
 /*
   Remove the specified index node
 */
-void slist_remove(slist *listHandler, int index){
-    slist_node *temp;
-    slist_node *deleteNode;
+void Slist_remove(Slist *listHandler, int index){
+    SlistNode *temp;
+    SlistNode *deleteNode;
 
     temp = listHandler->head;
 
@@ -80,10 +80,10 @@ void slist_remove(slist *listHandler, int index){
 /*
   Add node to front of the list
 */
-void slist_prepend(slist *listHandler, int data){
-    slist_node *temp;
+void Slist_prepend(Slist *listHandler, int data){
+    SlistNode *temp;
 
-    temp = malloc(sizeof(slist_node));
+    temp = malloc(sizeof(SlistNode));
     temp->data = data;
 
     if(listHandler->head == NULL){
@@ -100,10 +100,10 @@ void slist_prepend(slist *listHandler, int data){
 /*
   Add node to end of the list
 */
-void slist_append(slist *listHandler, int data){
-    slist_node *temp;
+void Slist_append(Slist *listHandler, int data){
+    SlistNode *temp;
 
-    temp = malloc(sizeof(slist_node));
+    temp = malloc(sizeof(SlistNode));
     temp->data = data;
     temp->next = NULL;
     
@@ -120,8 +120,8 @@ void slist_append(slist *listHandler, int data){
 /*
   Delete and return last node
 */
-int slist_pop(slist *listHandler){
-    slist_node *temp;
+int Slist_pop(Slist *listHandler){
+    SlistNode *temp;
     int returnValue;
 
     temp = listHandler->head;
@@ -141,8 +141,8 @@ int slist_pop(slist *listHandler){
 /*
   Delete and return first node
 */
-int slist_popFront(slist *listHandler){
-    slist_node *temp;
+int Slist_popFront(Slist *listHandler){
+    SlistNode *temp;
     int returnValue;
 
     temp = listHandler->head;
@@ -157,8 +157,8 @@ int slist_popFront(slist *listHandler){
 /*
   Print all the nodes in a list
 */
-void slist_print(slist *listHandler){
-    slist_node *i = listHandler->head;
+void Slist_print(Slist *listHandler){
+    SlistNode *i = listHandler->head;
 
     printf("[ ");
     while(i != NULL){
@@ -171,8 +171,8 @@ void slist_print(slist *listHandler){
 /*
   Delete all nodes and free memory
 */
-void slist_free(slist *listHandler){
-    slist_node *tmp;
+void Slist_free(Slist *listHandler){
+    SlistNode *tmp;
 
     while(listHandler->head != NULL){
         tmp = listHandler->head;

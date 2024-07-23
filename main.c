@@ -7,6 +7,6 @@
 
 int main(void)
 {   
-    TEST_queue();
+    TEST_slist();
     return 0;
 }
