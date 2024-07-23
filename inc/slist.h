@@ -20,7 +20,7 @@ typedef struct _slist{
 
 SlistStatus Slist_init( Slist *listHandler );
 SlistStatus Slist_insert( Slist *listHandler, int index, int data );
-void Slist_remove( Slist *listHandler, int index );
+SlistStatus Slist_remove( Slist *listHandler, int index );
 void Slist_print( Slist *listHandler );
 void Slist_free( Slist *listHandler );
 

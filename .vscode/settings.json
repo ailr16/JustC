@@ -2,6 +2,7 @@
     "files.associations": {
         "*.c": "c",
         "dlist.h": "c",
-        "gtest.h": "c"
+        "gtest.h": "c",
+        "stdlib.h": "c"
     }
 }
