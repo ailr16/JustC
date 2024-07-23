@@ -1,6 +1,7 @@
 #include "dlist.h"
 #include "slist.h"
 #include "rbuffer.h"
+#include "queue.h"
 
 void slist_test(void);
 void dlist_test(void);
@@ -9,16 +10,51 @@ void rbuffer_test(void);
 #define BUFFER_SIZE 6
 
 int a[BUFFER_SIZE];
-
-rbuffer buffer1;
+Queue q;
 
 int main(void)
 {   
-    rbuffer_test();
+    QueueStatus status;
+    int retVal;
+
+    Queue_Init( &q, BUFFER_SIZE, a );
+
+    status = Queue_Dequeue( &q, &retVal );
+
+    status = Queue_Enqueue( &q, 8 );
+    status = Queue_Enqueue( &q, 9 );
+    status = Queue_Enqueue( &q, 10 );
+    status = Queue_Enqueue( &q, 11 );
+    status = Queue_Enqueue( &q, 12 );
+    status = Queue_Enqueue( &q, 13 );
+    status = Queue_Enqueue( &q, 14 );
+
+    status = Queue_Dequeue( &q, &retVal );
+    status = Queue_Dequeue( &q, &retVal );
+    status = Queue_Dequeue( &q, &retVal );
+    status = Queue_Dequeue( &q, &retVal );
+    status = Queue_Dequeue( &q, &retVal );
+    status = Queue_Dequeue( &q, &retVal );
+    status = Queue_Dequeue( &q, &retVal );
+
+    status = Queue_Enqueue( &q, 14 );
+    status = Queue_Enqueue( &q, 15 );
+    status = Queue_Enqueue( &q, 16 );
+
+    status = Queue_Dequeue( &q, &retVal );
+    status = Queue_Dequeue( &q, &retVal );
+    status = Queue_Dequeue( &q, &retVal );
+    status = Queue_Dequeue( &q, &retVal );
+    status = Queue_Dequeue( &q, &retVal );
+
     return 0;
 }
 
 void rbuffer_test(void){
+    int a[BUFFER_SIZE];
+
+    rbuffer buffer1;
+    
     rbufferStatus status = RBUFFER_OK;
     int getted = 0;
 

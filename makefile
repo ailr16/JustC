@@ -7,6 +7,7 @@ SRCS := main.c
 SRCS += src/dlist.c
 SRCS += src/slist.c
 SRCS += src/rbuffer.c
+SRCS += src/queue.c
 
 INC_DIR := inc
 
