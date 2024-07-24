@@ -4,25 +4,25 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-typedef struct _dlist_node {
+typedef enum _DlistStatus{
+    DLIST_OK    = 0,
+    DLIST_ERROR = 1
+} DlistStatus;
+
+typedef struct _DlistNode {
     int data;
-    struct _dlist_node *prev;
-    struct _dlist_node *next;
-} dlist_node;
+    struct _DlistNode *prev;
+    struct _DlistNode *next;
+} DlistNode;
 
-typedef struct _dlist{
-    dlist_node *head;
-    dlist_node *tail;
-} dlist;
+typedef struct _Dlist{
+    DlistNode *head;
+} Dlist;
 
-void dlist_init(dlist *listHandler);
-void dlist_insert(dlist *listHandler, int index, int data);
-void dlist_remove(dlist *listHandler, int index);
-void dlist_prepend(dlist *listHandler, int data);
-void dlist_append(dlist *listHandler, int data);
-int  dlist_pop(dlist *listHandler);
-int  dlist_popFront(dlist *listHandler);
-void dlist_print(dlist *listHandler);
-void dlist_free(dlist *listHandler);
+void Dlist_init(Dlist *listHandler);
+DlistStatus Dlist_insert(Dlist *listHandler, int index, int data);
+void Dlist_remove(Dlist *listHandler, int index);
+void Dlist_print(Dlist *listHandler);
+void Dlist_free(Dlist *listHandler);
 
 #endif
