@@ -4,6 +4,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#define Slist_append( list, data ) Slist_insert( &list, -1, data )
+#define Slist_preppend( list, data ) Slist_insert( &list, 0, data )
+#define Slist_pop( list, data ) ( Slist_getIndex( &list, -1, &data ), Slist_remove( &list, -1 ) )
+#define Slist_popFront( list, data ) ( Slist_getIndex( &list, 0, &data ), Slist_remove( &list, 0 ) )
+
 typedef enum _SlistStatus{
     SLIST_OK    = 0,
     SLIST_ERROR = 1
