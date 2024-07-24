@@ -24,6 +24,8 @@ void TEST_dlist(void){
     status = Dlist_remove( &dlistH, -1 );
     status = Dlist_remove( &dlistH, 2 );
     status = Dlist_remove( &dlistH, 3 );
+    status = Dlist_remove( &dlistH, 1 );
+    status = Dlist_remove( &dlistH, 2 );
 
     Dlist_free( &dlistH );
 }

@@ -142,12 +142,14 @@ DlistStatus Dlist_remove(Dlist *listHandler, int index){
 		int count = 0;
 		temp = listHandler->head;
 
-		while(temp->next != NULL){
+		while(temp->next->next != NULL){
 			count++;
 			if(count == index) break;
 			temp = temp->next;
 		}
-		if( index > count ) return DLIST_ERROR;
+		if( index > count ){
+			return Dlist_remove( listHandler, -1 );
+		}
 
 		old = temp->next;
 
