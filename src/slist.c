@@ -154,6 +154,48 @@ SlistStatus Slist_remove(Slist *listHandler, int index){
 }
 
 /*
+  Remove the specified index node
+*/
+SlistStatus Slist_getIndex( Slist *listHandler, int index, int *data ){
+    SlistNode *temp;
+
+    if( _Slist_checkStatus( listHandler ) == SLIST_EMPTY ) return SLIST_ERROR;
+    if( index < -1 ) return SLIST_ERROR;
+
+    if( _Slist_checkStatus( listHandler ) == SLIST_1ITEM ){
+        *data = listHandler->head->data;
+        return SLIST_OK;
+    }
+
+    if( index == 0 ){
+        *data = listHandler->head->data;
+        return SLIST_OK;
+    }
+    else if( index == -1 ){
+        temp = listHandler->head;
+        while( temp->next != NULL ){
+            temp = temp->next;
+        }
+        *data = temp->data;
+
+        return SLIST_OK;
+    }
+    else{
+        int count = 0;
+
+        temp = listHandler->head;
+        while( temp->next != NULL ){
+            count++;
+            if( count >= index + 1 ) break;
+            temp = temp->next;
+        }
+        *data = temp->data;
+
+        return SLIST_OK;
+    }
+}
+
+/*
   Print all the nodes in a list
 */
 void Slist_print( Slist *listHandler ){

@@ -21,6 +21,7 @@ typedef struct _slist{
 SlistStatus Slist_init( Slist *listHandler );
 SlistStatus Slist_insert( Slist *listHandler, int index, int data );
 SlistStatus Slist_remove( Slist *listHandler, int index );
+SlistStatus Slist_getIndex( Slist *listHandler, int index, int *data );
 void Slist_print( Slist *listHandler );
 void Slist_free( Slist *listHandler );
 

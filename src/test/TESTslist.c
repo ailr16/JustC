@@ -4,6 +4,7 @@
 void TEST_slist(void){
     Slist slistH;
     SlistStatus status;
+    int value;
 
     status = Slist_init( &slistH );
 
@@ -19,16 +20,26 @@ void TEST_slist(void){
     status = Slist_insert( &slistH, 4, 22 );
     status = Slist_insert( &slistH, 20, 23 );
 
+    status = Slist_getIndex( &slistH, -4, &value );
+    status = Slist_getIndex( &slistH, 0, &value );
+    status = Slist_getIndex( &slistH, -1, &value );
+    status = Slist_getIndex( &slistH, 4, &value );
+    status = Slist_getIndex( &slistH, 40, &value );
+
     status = Slist_remove( &slistH, 0 );
     status = Slist_remove( &slistH, -1 );
     status = Slist_remove( &slistH, 3 );
     status = Slist_remove( &slistH, 50 );
     status = Slist_remove( &slistH, 50 );
+    status = Slist_getIndex( &slistH, -1, &value );
     status = Slist_remove( &slistH, 50 );
     status = Slist_remove( &slistH, 50 );
+    status = Slist_getIndex( &slistH, -1, &value );
     status = Slist_remove( &slistH, 50 );
+    status = Slist_getIndex( &slistH, 0, &value );
     status = Slist_remove( &slistH, 0 );
     status = Slist_remove( &slistH, 3 );
+    status = Slist_getIndex( &slistH, 0, &value );
 
     Slist_free(&slistH);
 }
