@@ -24,6 +24,20 @@ SlistStatus Slist_insert(Slist *listHandler, int index, int data){
     SlistNode *temp;
     SlistNode *new;
     
+    if( index < -1 ) return SLIST_ERROR;
+
+    if( (_Slist_checkStatus( listHandler ) == SLIST_EMPTY) ){
+        new = (SlistNode*)malloc( sizeof(SlistNode) );
+        if( new == NULL ) return SLIST_ERROR;
+
+        new->data = data;
+        new->next = NULL;
+
+        listHandler->head = new;
+
+        return SLIST_OK;
+    }
+
     if( index == 0 ){
         // Insert at the beggining
         temp = listHandler->head;
@@ -60,10 +74,6 @@ SlistStatus Slist_insert(Slist *listHandler, int index, int data){
         // Any other index
         temp = listHandler->head;
         int count = 0;
-
-        if( index < -1 ){
-            return SLIST_ERROR;
-        }
 
         while( temp->next != NULL ){
             count++;
@@ -146,7 +156,7 @@ SlistStatus Slist_remove(Slist *listHandler, int index){
 /*
   Print all the nodes in a list
 */
-void Slist_print(Slist *listHandler){
+void Slist_print( Slist *listHandler ){
     SlistNode *i = listHandler->head;
 
     printf("[ ");
