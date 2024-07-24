@@ -21,7 +21,7 @@ typedef struct _Dlist{
 
 void Dlist_init(Dlist *listHandler);
 DlistStatus Dlist_insert(Dlist *listHandler, int index, int data);
-void Dlist_remove(Dlist *listHandler, int index);
+DlistStatus Dlist_remove(Dlist *listHandler, int index);
 void Dlist_print(Dlist *listHandler);
 void Dlist_free(Dlist *listHandler);
 
