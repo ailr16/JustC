@@ -9,7 +9,7 @@ void _Stack_checkStatus( Stack *stackHandler ){
         stackHandler->status = STACK_OK;
 }
 
-void Stack_init( Stack *stackHandler, int stackSize ){
+StackStatus Stack_init( Stack *stackHandler, int stackSize ){
     stackHandler->size = stackSize - 1;
 
     stackHandler->array = (int*)malloc( stackSize*(sizeof(int)) );

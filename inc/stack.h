@@ -18,7 +18,7 @@ typedef struct _Stack{
     StackStatus status;
 } Stack;
 
-void Stack_init( Stack *stackHandler, int stackSize );
+StackStatus Stack_init( Stack *stackHandler, int stackSize );
 void Stack_destroy( Stack *stackHandler );
 StackStatus Stack_push( Stack *stackHandler, int data );
 StackStatus Stack_pop( Stack *stackHandler, int *data );
