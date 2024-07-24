@@ -5,5 +5,6 @@ void TEST_dlist(void);
 void TEST_slist(void);
 void TEST_queue(void);
 void TEST_rbuffer(void);
+void TEST_stack(void);
 
 #endif

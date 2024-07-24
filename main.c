@@ -7,6 +7,6 @@
 
 int main(void)
 {   
-    TEST_dlist();
+    TEST_stack();
     return 0;
 }

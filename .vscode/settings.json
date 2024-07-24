@@ -3,6 +3,7 @@
         "*.c": "c",
         "dlist.h": "c",
         "gtest.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "stack.h": "c"
     }
 }
