@@ -2,7 +2,7 @@
 
 int main(void)
 {   
-    TEST_queue_with_two_stack();
+    TEST_rbuffer();
 
     return 0;
 }

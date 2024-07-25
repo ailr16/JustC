@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 typedef enum _rbuffer_status{
     RBUFFER_OK    = 0,
@@ -11,17 +12,18 @@ typedef enum _rbuffer_status{
 } rbufferStatus;
 
 typedef struct _rbuffer{
-    int *array;
+    void *array;
     int head;
     int tail;
     int size;
+    int elementSize;
     int itemCount;
     rbufferStatus status;
 } rbuffer;
 
-void rbuffer_init( rbuffer *buffer, int size, int *array);
-rbufferStatus rbuffer_put( rbuffer *buffer, int value );
-rbufferStatus rbuffer_get( rbuffer *buffer, int *value );
+void rbuffer_init( rbuffer *buffer );
+rbufferStatus rbuffer_put( rbuffer *buffer, void *value );
+rbufferStatus rbuffer_get( rbuffer *buffer, void *value );
 rbufferStatus rbuffer_getStatus( rbuffer *buffer );
 rbufferStatus rbuffer_flush( rbuffer *buffer );
 

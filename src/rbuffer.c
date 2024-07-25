@@ -2,22 +2,20 @@
 
 void rbuffer_checkStatus( rbuffer *buffer );
 
-void rbuffer_init( rbuffer *buffer, int size, int *array ){
-    buffer->array = array;
-    buffer->head = 0;
-    buffer->tail = 0;
-    buffer->size = size;
-    buffer->itemCount = 0;
-    buffer->status = RBUFFER_EMPTY;
+void rbuffer_init( rbuffer *buffer ){
+    buffer->head        = 0;
+    buffer->tail        = 0;
+    buffer->itemCount   = 0;
+    buffer->status      = RBUFFER_EMPTY;
 }
 
-rbufferStatus rbuffer_put( rbuffer *buffer, int value ){
+rbufferStatus rbuffer_put( rbuffer *buffer, void *data ){
     rbufferStatus status = RBUFFER_OK;
-    
+
     rbuffer_checkStatus( buffer );
 
     if( buffer->status != RBUFFER_FULL ){
-        buffer->array[buffer->head] = value;
+        memcpy( (buffer->array + (buffer->elementSize * buffer->head)), data, buffer->elementSize );
         buffer->head++;
         buffer->itemCount++;
         if( buffer->head == buffer->size ){
@@ -27,17 +25,17 @@ rbufferStatus rbuffer_put( rbuffer *buffer, int value ){
     else{
         status = RBUFFER_FULL;
     }
-
+    
     return status;
 }
 
-rbufferStatus rbuffer_get( rbuffer *buffer, int *value ){
+rbufferStatus rbuffer_get( rbuffer *buffer, void *value ){
     rbufferStatus status;
-
+    
     rbuffer_checkStatus( buffer );
 
     if( buffer->status != RBUFFER_EMPTY ){
-        *value = buffer->array[buffer->tail];
+        memcpy( value, (buffer->array + (buffer->elementSize * buffer->tail)), buffer->elementSize );
         status = RBUFFER_OK;
         buffer->tail++;
         buffer->itemCount--;
@@ -48,7 +46,7 @@ rbufferStatus rbuffer_get( rbuffer *buffer, int *value ){
     else{
         status = RBUFFER_EMPTY;
     }
-
+    
     return status;
 }
 
@@ -66,11 +64,13 @@ rbufferStatus rbuffer_flush( rbuffer *buffer ){
 }
 
 void rbuffer_print( rbuffer *buffer ){
+    /*
     printf("[ ");
     for(int i = 0; i < buffer->size; i++){
         printf("%d ", buffer->array[i]);
     }
     printf("]\n");
+    */
 }
 
 void rbuffer_checkStatus( rbuffer *buffer ){
