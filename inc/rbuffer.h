@@ -5,27 +5,27 @@
 #include <stdio.h>
 #include <string.h>
 
-typedef enum _rbuffer_status{
+typedef enum _Rbuffer_status{
     RBUFFER_OK    = 0,
     RBUFFER_FULL  = 1,
     RBUFFER_EMPTY = 2
-} rbufferStatus;
+} RbufferStatus;
 
-typedef struct _rbuffer{
+typedef struct _Rbuffer{
     void *array;
     int head;
     int tail;
     int size;
     int elementSize;
     int itemCount;
-    rbufferStatus status;
-} rbuffer;
+    RbufferStatus status;
+} Rbuffer;
 
-void rbuffer_init( rbuffer *buffer );
-rbufferStatus rbuffer_put( rbuffer *buffer, void *value );
-rbufferStatus rbuffer_get( rbuffer *buffer, void *value );
-rbufferStatus rbuffer_getStatus( rbuffer *buffer );
-rbufferStatus rbuffer_flush( rbuffer *buffer );
+void Rbuffer_init( Rbuffer *buffer );
+RbufferStatus Rbuffer_put( Rbuffer *buffer, void *value );
+RbufferStatus Rbuffer_get( Rbuffer *buffer, void *value );
+RbufferStatus Rbuffer_getStatus( Rbuffer *buffer );
+RbufferStatus Rbuffer_flush( Rbuffer *buffer );
 
-void rbuffer_print( rbuffer *buffer );
+void Rbuffer_print( Rbuffer *buffer );
 #endif

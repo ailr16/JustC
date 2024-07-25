@@ -4,6 +4,7 @@
         "dlist.h": "c",
         "gtest.h": "c",
         "stdlib.h": "c",
-        "stack.h": "c"
+        "stack.h": "c",
+        "rbuffer.h": "c"
     }
 }

@@ -1,18 +1,18 @@
 #include "rbuffer.h"
 
-void rbuffer_checkStatus( rbuffer *buffer );
+void Rbuffer_checkStatus( Rbuffer *buffer );
 
-void rbuffer_init( rbuffer *buffer ){
+void Rbuffer_init( Rbuffer *buffer ){
     buffer->head        = 0;
     buffer->tail        = 0;
     buffer->itemCount   = 0;
     buffer->status      = RBUFFER_EMPTY;
 }
 
-rbufferStatus rbuffer_put( rbuffer *buffer, void *data ){
-    rbufferStatus status = RBUFFER_OK;
+RbufferStatus Rbuffer_put( Rbuffer *buffer, void *data ){
+    RbufferStatus status = RBUFFER_OK;
 
-    rbuffer_checkStatus( buffer );
+    Rbuffer_checkStatus( buffer );
 
     if( buffer->status != RBUFFER_FULL ){
         memcpy( (buffer->array + (buffer->elementSize * buffer->head)), data, buffer->elementSize );
@@ -29,10 +29,10 @@ rbufferStatus rbuffer_put( rbuffer *buffer, void *data ){
     return status;
 }
 
-rbufferStatus rbuffer_get( rbuffer *buffer, void *value ){
-    rbufferStatus status;
+RbufferStatus Rbuffer_get( Rbuffer *buffer, void *value ){
+    RbufferStatus status;
     
-    rbuffer_checkStatus( buffer );
+    Rbuffer_checkStatus( buffer );
 
     if( buffer->status != RBUFFER_EMPTY ){
         memcpy( value, (buffer->array + (buffer->elementSize * buffer->tail)), buffer->elementSize );
@@ -50,11 +50,11 @@ rbufferStatus rbuffer_get( rbuffer *buffer, void *value ){
     return status;
 }
 
-rbufferStatus rbuffer_getStatus( rbuffer *buffer ){
+RbufferStatus Rbuffer_getStatus( Rbuffer *buffer ){
     return buffer->status;
 }
 
-rbufferStatus rbuffer_flush( rbuffer *buffer ){
+RbufferStatus Rbuffer_flush( Rbuffer *buffer ){
     buffer->head = 0;
     buffer->tail = 0;
     buffer->itemCount = 0;
@@ -63,7 +63,7 @@ rbufferStatus rbuffer_flush( rbuffer *buffer ){
     return RBUFFER_OK;
 }
 
-void rbuffer_print( rbuffer *buffer ){
+void Rbuffer_print( Rbuffer *buffer ){
     /*
     printf("[ ");
     for(int i = 0; i < buffer->size; i++){
@@ -73,7 +73,7 @@ void rbuffer_print( rbuffer *buffer ){
     */
 }
 
-void rbuffer_checkStatus( rbuffer *buffer ){
+void Rbuffer_checkStatus( Rbuffer *buffer ){
     if( buffer->itemCount > 0 ){
         buffer->status = RBUFFER_OK;
     }
