@@ -2,7 +2,7 @@
 
 int main(void)
 {   
-    TEST_rbuffer();
+    TEST_btree();
 
     return 0;
 }

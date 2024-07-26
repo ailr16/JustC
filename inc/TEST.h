@@ -7,5 +7,6 @@ void TEST_queue(void);
 void TEST_rbuffer(void);
 void TEST_stack(void);
 void TEST_queue_with_two_stack(void);
+void TEST_btree(void);
 
 #endif
