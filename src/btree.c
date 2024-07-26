@@ -4,8 +4,15 @@ void Btree_init( Btree *btreeHandler ){
     btreeHandler->root = NULL;
 }
 
+void _destroy( BtreeNode *node ){
+    if( node != NULL ){
+        _destroy( node->left );
+        _destroy( node->right );
+        free(node);
+    }
+}
 void Btree_destroy( Btree *btreeHandler ){
-    free( btreeHandler->root );
+    _destroy( btreeHandler->root );
 }
 
 BtreeStatus Btree_insert( Btree *btreeHandler, int data ){
