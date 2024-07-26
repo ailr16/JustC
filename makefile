@@ -10,6 +10,7 @@ SRCS += src/rbuffer.c
 SRCS += src/queue.c
 SRCS += src/stack.c
 SRCS += src/btree.c
+SRCS += src/rrsch.c
 
 SRCS += src/test/TESTqueue.c
 SRCS += src/test/TESTdlist.c
@@ -17,13 +18,14 @@ SRCS += src/test/TESTslist.c
 SRCS += src/test/TESTrbuffer.c
 SRCS += src/test/TESTstack.c
 SRCS += src/test/TESTbtree.c
+SRCS += src/test/TESTrrsch.c
 
 
 INC_DIR := inc
 
 all : $(SRCS) 
 	mkdir -p $(BUILD_DIR)
-	$(CC) -o $(BUILD_DIR)/$(PROJECT_NAME) $^ -I $(INC_DIR) -g
+	$(CC) -o $(BUILD_DIR)/$(PROJECT_NAME) $^ -I $(INC_DIR) -g -W
 	./$(BUILD_DIR)/$(PROJECT_NAME)
 
 debug:

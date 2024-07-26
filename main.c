@@ -2,7 +2,7 @@
 
 int main(void)
 {   
-    TEST_btree();
+    TEST_rrsch();
 
     return 0;
 }
