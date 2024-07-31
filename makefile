@@ -11,6 +11,7 @@ SRCS += src/queue.c
 SRCS += src/stack.c
 SRCS += src/btree.c
 SRCS += src/rrsch.c
+SRCS += src/evnotif.c
 
 SRCS += src/test/TESTqueue.c
 SRCS += src/test/TESTdlist.c
@@ -19,6 +20,7 @@ SRCS += src/test/TESTrbuffer.c
 SRCS += src/test/TESTstack.c
 SRCS += src/test/TESTbtree.c
 SRCS += src/test/TESTrrsch.c
+SRCS += src/test/TESTevnotif.c
 
 
 INC_DIR := inc

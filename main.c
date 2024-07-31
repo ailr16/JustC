@@ -2,7 +2,7 @@
 
 int main(void)
 {   
-    TEST_rrsch();
+    TEST_evnotif();
 
     return 0;
 }
