@@ -14,6 +14,11 @@ typedef enum{
     EVENT_TYPE_COUNT
 } EventType;
 
+typedef enum{
+    EVNOTIF_OK = 0,
+    EVNOTIF_ERROR = 1
+} EvNotifStatus;
+
 typedef void (*EventHandler)(void);
 
 typedef struct _EvNotif{
@@ -22,6 +27,8 @@ typedef struct _EvNotif{
 } EvNotif;
 
 void EvNotif_init( EvNotif *evnHandler );
-void EvNotif_register( EvNotif *evnHandler, EventType evType, EventHandler evHandler);
+EvNotifStatus EvNotif_register( EvNotif *evnHandler, EventType evType, EventHandler evHandler);
+EvNotifStatus EvNotif_unregister( EvNotif *evnHandler, EventType evType, EventHandler evHandler);
+void EvNotif_notify( EvNotif *evnHandler, EventType evType );
 
 #endif
