@@ -12,6 +12,7 @@ SRCS += src/stack.c
 SRCS += src/btree.c
 SRCS += src/rrsch.c
 SRCS += src/evnotif.c
+SRCS += src/algos.c
 
 SRCS += src/test/TESTqueue.c
 SRCS += src/test/TESTdlist.c
