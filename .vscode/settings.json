@@ -7,6 +7,7 @@
         "stack.h": "c",
         "rbuffer.h": "c",
         "btree.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "slist.h": "c"
     }
 }
