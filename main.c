@@ -2,7 +2,7 @@
 
 int main(void)
 {   
-    TEST_evnotif();
+    TEST_slist();
 
     return 0;
 }
