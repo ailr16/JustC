@@ -805,7 +805,6 @@ extern int __overflow (FILE *, int);
 # 973 "/usr/include/stdio.h" 3 4
 
 # 2 "program.c" 2
-
 # 1 "including.h" 1
 
 
@@ -820,10 +819,12 @@ union{
     int a;
     char b[4];
 } includingUnion;
-# 4 "program.c" 2
+# 3 "program.c" 2
+
+
 
 int main(void){
-    printf("Hello world!\n");
+    printf("Square of %d is: %d\n", 2+3, (2+3)*(2+3));
 
     return 0;
 }
