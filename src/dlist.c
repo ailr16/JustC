@@ -102,7 +102,7 @@ DlistStatus Dlist_insert(Dlist *listHandler, int index, int data){
 /*
   Remove specified node index 
 */
-DlistStatus Dlist_remove(Dlist *listHandler, int index){
+DlistStatus Dlist_remove(Dlist *listHandler, int index, int *data){
 	DlistNode *temp;
 	DlistNode *old;
 
@@ -124,6 +124,8 @@ DlistStatus Dlist_remove(Dlist *listHandler, int index){
 		old = listHandler->head;
 		listHandler->head = old->next;
 
+		*data = old->data;
+
 		old->next->prev = NULL;
 		free(old);
 
@@ -136,6 +138,8 @@ DlistStatus Dlist_remove(Dlist *listHandler, int index){
 			temp = temp->next;
 		}
 		temp->prev->next = NULL;
+		*data = temp->data;
+
 		free(temp);
 	}
 	else{
@@ -148,13 +152,15 @@ DlistStatus Dlist_remove(Dlist *listHandler, int index){
 			temp = temp->next;
 		}
 		if( index > count ){
-			return Dlist_remove( listHandler, -1 );
+			return Dlist_remove( listHandler, -1, data );
 		}
 
 		old = temp->next;
 
 		temp->next = old->next;
 		old->next->prev = old->prev;
+		*data = old->data;
+		free( old );
 
 		return DLIST_OK;
 	}
