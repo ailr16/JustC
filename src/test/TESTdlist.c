@@ -1,5 +1,6 @@
 #include "TEST.h"
 #include "dlist.h"
+#include "algos.h"
 
 void TEST_dlist(void){
     Dlist dlistH;
@@ -29,7 +30,48 @@ void TEST_dlist(void){
 
     Dlist_print( &dlistH );
 
-    
+
+    // Search algorithm
+
+    uint32_t *resultIndex = NULL;
+    uint32_t resultSize = 0;
+
+    status = Search_item( &dlistH, DLIST_T, 16, &resultIndex, &resultSize );
+    if(status == DLIST_OK){
+        printf("Searching for 16: [ ");
+        for( uint32_t i = 0; i < resultSize; i++)
+            printf( "%d ", resultIndex[i] );
+        printf("]\n");
+    }
+
+    status = Search_item( &dlistH, DLIST_T, 22, &resultIndex, &resultSize );
+    if(status == DLIST_OK){
+        printf("Searching for 22: [ ");
+        for( uint32_t i = 0; i < resultSize; i++)
+            printf( "%d ", resultIndex[i] );
+        printf("]\n");
+    }
+
+    status = Search_item( &dlistH, DLIST_T, 900, &resultIndex, &resultSize );
+    if(status == DLIST_OK){
+        printf("Searching for 900: [ ");
+        for( uint32_t i = 0; i < resultSize; i++)
+            printf( "%d ", resultIndex[i] );
+        printf("]\n");
+    }
+
+    status = DLIST_APPEND( dlistH, 16 );
+    Dlist_print( &dlistH );
+
+    status = Search_item( &dlistH, DLIST_T, 16, &resultIndex, &resultSize );
+    if(status == DLIST_OK){
+        printf("Searching for 16: [ ");
+        for( uint32_t i = 0; i < resultSize; i++)
+            printf( "%d ", resultIndex[i] );
+        printf("]\n");
+    }
+
+    free( resultIndex );
 
     int data;
 

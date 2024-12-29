@@ -6,8 +6,6 @@
 
 #include "algos_config.h"
 
-#include "slist.h"
-
 typedef uint8_t GenericStatus;
 typedef enum Structure_t{
     SLIST_T,

@@ -8,6 +8,7 @@
         "rbuffer.h": "c",
         "btree.h": "c",
         "stdio.h": "c",
-        "slist.h": "c"
+        "slist.h": "c",
+        "cstdint": "c"
     }
 }
