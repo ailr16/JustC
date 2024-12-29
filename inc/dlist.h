@@ -6,8 +6,8 @@
 
 #define DLIST_APPEND( list, data ) Dlist_insert( &list, -1, data )
 #define DLIST_PREPEND( list, data ) Dlist_insert( &list, 0, data )
-//#define DLIST_POP( list, data ) ( Dlist_remove( &list, -1, &data ), Slist_remove( &list, -1 ) )
-//#define DLIST_POPFRONT( list, data ) ( Slist_getIndex( &list, 0, &data ), Slist_remove( &list, 0 ) )
+#define DLIST_POP( list, data ) ( Dlist_remove( &list, -1, &data ) )
+#define DLIST_POPFRONT( list, data ) ( Dlist_remove( &list, 0, &data ) )
 
 typedef enum _DlistStatus{
     DLIST_OK    = 0,

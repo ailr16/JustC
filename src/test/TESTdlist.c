@@ -4,6 +4,7 @@
 void TEST_dlist(void){
     Dlist dlistH;
     DlistStatus status;
+    int outValue;
 
     Dlist_init( &dlistH );
 
@@ -18,6 +19,17 @@ void TEST_dlist(void){
     status = Dlist_insert( &dlistH, 40, 22 );
 
     Dlist_print( &dlistH );
+
+    status = DLIST_APPEND( dlistH, 32 );
+    status = DLIST_PREPEND( dlistH, 128 );
+    status = DLIST_PREPEND( dlistH, 128 );
+    Dlist_print( &dlistH );
+    status = DLIST_POPFRONT( dlistH, outValue );
+    status = DLIST_POP( dlistH, outValue );
+
+    Dlist_print( &dlistH );
+
+    
 
     int data;
 
