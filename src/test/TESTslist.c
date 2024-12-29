@@ -24,27 +24,42 @@ void TEST_slist(void){
     status = Slist_insert( &slistH, 1, 21 );
     status = Slist_insert( &slistH, 4, 22 );
     status = Slist_insert( &slistH, 20, 23 );
+    status = SLIST_APPEND( slistH, 16 );
+    status = SLIST_APPEND( slistH, 16 );
+    status = SLIST_PREPEND( slistH, 16 );
 
     // Search algorithm
 
     Slist_print( &slistH );
 
-    uint32_t resultIndex = 0;
-    status = Search_item( (void*)&slistH, SLIST_T, 16, &resultIndex );
-    if(status == SLIST_OK)
-        printf("Index of first [%d] occurrence: %d\n", 16, resultIndex );
+    uint32_t *resultIndex = NULL;
+    uint32_t resultSize = 0;
 
-    status = Search_item( (void*)&slistH, SLIST_T, 23, &resultIndex );
-    if(status == SLIST_OK)
-        printf("Index of first [%d] occurrence: %d\n", 23, resultIndex );
+    status = Search_item( &slistH, SLIST_T, 16, &resultIndex, &resultSize );
+    if(status == SLIST_OK){
+        printf("[ ");
+        for( uint32_t i = 0; i < resultSize; i++)
+            printf( "%d ", resultIndex[i] );
+        printf("]\n");
+    }
 
-    status = Search_item( (void*)&slistH, SLIST_T, 20, &resultIndex );
-    if(status == SLIST_OK)
-        printf("Index of first [%d] occurrence: %d\n", 20, resultIndex );
+    status = Search_item( &slistH, SLIST_T, 22, &resultIndex, &resultSize );
+    if(status == SLIST_OK){
+        printf("[ ");
+        for( uint32_t i = 0; i < resultSize; i++)
+            printf( "%d ", resultIndex[i] );
+        printf("]\n");
+    }
 
-    status = Search_item( (void*)&slistH, SLIST_T, 900, &resultIndex );
-    if(status == SLIST_OK)
-        printf("Index of first [%d] occurrence: %d\n", 900, resultIndex );
+    status = Search_item( &slistH, SLIST_T, 900, &resultIndex, &resultSize );
+    if(status == SLIST_OK){
+        printf("[ ");
+        for( uint32_t i = 0; i < resultSize; i++)
+            printf( "%d ", resultIndex[i] );
+        printf("]\n");
+    }
+
+    free( resultIndex );
 
     status = SLIST_APPEND( slistH, 66 );
     status = SLIST_PREPEND( slistH, 99 );
@@ -73,7 +88,9 @@ void TEST_slist(void){
     status = Slist_getIndex( &slistH, 0, &value );
 
 
-    Slist_free(&slistH);
+    Slist_print( &slistH );
+
+    Slist_free( &slistH );
 
     printf("--------------------\n");
 }

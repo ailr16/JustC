@@ -1,27 +1,41 @@
 #include "algos.h"
 
-GenericStatus Search_item( void* handler, Structure_t type, int data, uint32_t *retIndex ){
+
+GenericStatus Search_item( void* handler, Structure_t type, int data, uint32_t **retIndex, uint32_t *retSize ){
     if( type == SLIST_T ){
         SlistStatus returnValue = SLIST_ERROR;
         Slist *slistHandler;
         SlistNode *aux;
-        uint32_t index;
+
+        uint32_t currentIndex;
+        uint32_t *indexArray;
+        uint32_t occurrences;
 
         slistHandler = (Slist*)handler;
         aux = slistHandler->head;
 
-        index = 0;
+        indexArray = (uint32_t*)malloc( sizeof(uint32_t) );
+
+        currentIndex = 0;
+        occurrences  = 0;
+
+        #if LINEAR_SEARCH
+
         while( aux ){
             if( aux->data == data ){
                 returnValue = SLIST_OK;
-                break;
+                indexArray = (uint32_t*)(realloc( indexArray, sizeof(uint32_t) ));
+                indexArray[occurrences++] = currentIndex;
             }
 
-            index++;
+            currentIndex++;
             aux = aux->next;
         }
+        #endif
 
-        *retIndex = index;
+        // Return values
+        *retIndex = indexArray;
+        *retSize  = occurrences;
         return (GenericStatus)returnValue;
     }
 }
