@@ -7,6 +7,9 @@ void TEST_dlist(void){
     DlistStatus status;
     int outValue;
 
+    printf("--------------------\n");
+    printf("Double linked list test\n");
+
     Dlist_init( &dlistH );
 
     status = Dlist_insert( &dlistH, -4, 16 );
@@ -73,6 +76,14 @@ void TEST_dlist(void){
 
     free( resultIndex );
 
+    // Sum elements algo
+
+    uint32_t resultSum = 0;
+
+    Dlist_print( &dlistH );
+    status = Sum_elements( &dlistH, DLIST_T, &resultSum );
+    printf("Sum=%d\n", resultSum );
+
     int data;
 
     status = Dlist_remove( &dlistH, -3, &data );
@@ -84,4 +95,5 @@ void TEST_dlist(void){
     status = Dlist_remove( &dlistH, 2, &data );
 
     Dlist_free( &dlistH );
+    printf("--------------------\n");
 }

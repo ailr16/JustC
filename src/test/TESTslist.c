@@ -61,6 +61,14 @@ void TEST_slist(void){
 
     free( resultIndex );
 
+    // Sum elements algo
+
+    uint32_t resultSum = 0;
+
+    Slist_print( &slistH );
+    status = Sum_elements( &slistH, SLIST_T, &resultSum );
+    printf("Sum=%d\n", resultSum );
+
     status = SLIST_APPEND( slistH, 66 );
     status = SLIST_PREPEND( slistH, 99 );
     status = SLIST_POP( slistH, value );

@@ -78,3 +78,51 @@ GenericStatus Search_item( void* handler, Structure_t type, int data, uint32_t *
         return (GenericStatus)returnValue;
     }
 }
+
+GenericStatus Sum_elements( void* handler, Structure_t type, uint32_t *retSum ){
+    if( type == SLIST_T ){
+        Slist *slistHandler;
+        SlistNode *aux;
+
+        int32_t sum;
+    
+        slistHandler = (Slist*)handler;
+        aux = slistHandler->head;
+        sum = 0;
+
+        if( aux == NULL )
+            return (GenericStatus)SLIST_ERROR;
+
+        while( aux ){
+            sum += aux->data;
+            aux = aux->next;
+        }
+
+        // Return values
+        *retSum = sum;
+        return (GenericStatus)SLIST_OK;
+    }
+
+    if( type == DLIST_T ){
+        Dlist *dlistHandler;
+        DlistNode *aux;
+
+        int32_t sum;
+    
+        dlistHandler = (Dlist*)handler;
+        aux = dlistHandler->head;
+        sum = 0;
+
+        if( aux == NULL )
+            return (GenericStatus)SLIST_ERROR;
+
+        while( aux ){
+            sum += aux->data;
+            aux = aux->next;
+        }
+
+        // Return values
+        *retSum = sum;
+        return (GenericStatus)SLIST_OK;
+    }
+}

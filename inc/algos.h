@@ -13,5 +13,6 @@ typedef enum Structure_t{
 }Structure_t;
 
 GenericStatus Search_item( void* handler, Structure_t type, int data, uint32_t **retIndex, uint32_t *retSize );
+GenericStatus Sum_elements( void* handler, Structure_t type, uint32_t *retSum );
 
 #endif
