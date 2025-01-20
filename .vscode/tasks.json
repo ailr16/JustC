@@ -26,6 +26,30 @@
                 "isDefault": true
             },
             "detail": "compiler: /usr/bin/gcc"
+        },
+        {
+            "type": "cppbuild",
+            "label": "BuildMemAlloc",
+            "command": "/usr/bin/gcc",
+            "args": [
+                "${workspaceFolder}/edu/projects/memoryAllocator/src/*.c",
+                "-o",
+                "${workspaceFolder}/edu/projects/memoryAllocator/bin/memoryAllocator",
+                "-I",
+                "${workspaceFolder}/edu/projects/memoryAllocator/inc",
+                "-g"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "compiler: /usr/bin/gcc"
         }
     ]
 }
