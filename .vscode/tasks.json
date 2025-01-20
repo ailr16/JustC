@@ -50,6 +50,30 @@
                 "isDefault": true
             },
             "detail": "compiler: /usr/bin/gcc"
+        },
+        {
+            "type": "cppbuild",
+            "label": "BuildParser",
+            "command": "/usr/bin/gcc",
+            "args": [
+                "${workspaceFolder}/edu/projects/parser/src/*.c",
+                "-o",
+                "${workspaceFolder}/edu/projects/parser/bin/parser",
+                "-I",
+                "${workspaceFolder}/edu/projects/parser/inc",
+                "-g"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "compiler: /usr/bin/gcc"
         }
     ]
 }

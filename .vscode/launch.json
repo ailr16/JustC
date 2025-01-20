@@ -44,6 +44,26 @@
                     "ignoreFailures": true
                 }
             ]
+        },
+        {
+            "name": "(gdb) parser",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/edu/projects/parser/bin/parser",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "BuildParser",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
         }
     ]
 }
