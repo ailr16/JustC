@@ -11,6 +11,7 @@
         "slist.h": "c",
         "cstdint": "c",
         "typeinfo": "c",
-        "mem_alloc.h": "c"
+        "mem_alloc.h": "c",
+        "custom_string.h": "c"
     }
 }

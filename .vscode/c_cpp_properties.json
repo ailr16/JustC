@@ -4,12 +4,15 @@
             "name": "C",
             "includePath": [
                 "${workspaceFolder}/inc",
-                "/home/ailr16/Documents/GitHub/JustC/inc"
+                "${workspaceFolder}/inc/**"
             ],
             "intelliSenseMode": "linux-gcc-x64",
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "c17",
-            "cppStandard": "gnu++17"
+            "cppStandard": "gnu++17",
+            "defines": [
+                "CUSTOM_LIBC 1"
+            ]
         }
     ],
     "version": 4
