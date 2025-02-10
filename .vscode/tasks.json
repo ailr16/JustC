@@ -3,17 +3,21 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: gcc build active file",
+            "label": "BuildJustC",
             "command": "/usr/bin/gcc",
             "args": [
                 "${workspaceFolder}/main.c",
                 "${workspaceFolder}/src/*.c",
                 "${workspaceFolder}/src/test/*.c",
+                "${workspaceFolder}/src/custom_libc/*.c",
                 "-o",
                 "${workspaceFolder}/bin/justc",
                 "-I",
                 "${workspaceFolder}/inc",
-                "-g"
+                "-I",
+                "${workspaceFolder}/inc/custom_libc",
+                "-g",
+                "-D CUSTOM_LIBC=1"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
