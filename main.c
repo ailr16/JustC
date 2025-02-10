@@ -16,8 +16,26 @@ int main(void)
     #endif
 
     #if CUSTOM_LIBC
-    printf( "%u\n", c_strlen("hello") );
-    printf( "%u\n", c_strlen("ailr16") );
+    char str1[] = "hello";
+    char str2[] = "ailr16";
+    char str3[] = "hello";
+    char *aux = NULL;
+
+    printf( "%u\n", c_strlen(str1) );
+    printf( "%u\n", c_strlen(str2) );
+    printf("%s\n", str1);
+    aux = c_strchr("hello", (int)'e');
+    if( aux )
+        printf( "%c\n", *aux );
+    else
+        printf("Not found!\n");
+    aux = c_strchr("hello", (int)'m');
+    if( aux )
+        printf( "%c\n", aux );
+    else
+        printf("Not found!\n");
+    printf( "%d\n", c_strcmp( str1, str2 ) );
+    printf( "%d\n", c_strcmp( str1, str3 ) );
     #endif
 
     return 0;
