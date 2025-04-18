@@ -3,8 +3,12 @@
         {
             "name": "C",
             "includePath": [
-                "${workspaceFolder}/inc",
-                "${workspaceFolder}/inc/**"
+                "${workspaceFolder}/algos/**",
+                "${workspaceFolder}/custom_libc/**",
+                "${workspaceFolder}/dataStructures/**",
+                "${workspaceFolder}/games/**",
+                "${workspaceFolder}/test/**",
+                "${workspaceFolder}/build/_deps/googletest-src/googletest/**"
             ],
             "intelliSenseMode": "linux-gcc-x64",
             "compilerPath": "/usr/bin/gcc",
