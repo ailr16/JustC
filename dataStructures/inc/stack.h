@@ -1,6 +1,10 @@
 #ifndef STACK_H
 #define STACK_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -22,5 +26,9 @@ StackStatus Stack_init( Stack *stackHandler, int stackSize );
 void Stack_destroy( Stack *stackHandler );
 StackStatus Stack_push( Stack *stackHandler, int data );
 StackStatus Stack_pop( Stack *stackHandler, int *data );
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
