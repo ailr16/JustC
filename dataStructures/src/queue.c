@@ -2,47 +2,58 @@
 
 static void _Queue_checkStatus( Queue *queue );
 
-void Queue_Init( Queue *queue, int size, int *array ){
+void Queue_Init( Queue *queue, int size, int elementSize, void* array ){
     queue->array = array;
     queue->size = size;
     queue->head = 0;
     queue->tail = 0;
     queue->status = QUEUE_EMPTY;
+    queue->elementSize = elementSize;
 }
 
-QueueStatus Queue_Enqueue( Queue *queue, int value ){
+QueueStatus Queue_Enqueue( Queue *queue, void* value ){
     QueueStatus status = QUEUE_OK;
     _Queue_checkStatus( queue );
 
     if( queue->status != QUEUE_FULL){
-        queue->array[queue->head++] = value;
+        memcpy(queue->array + (queue->elementSize * queue->head++),
+               value,
+               queue->elementSize);
         queue->status = QUEUE_OK;
     }
     else{
-        status = QUEUE_ERROR;
+        status = QUEUE_FULL;
         queue->status = QUEUE_FULL;
     }
 
     return status;
 }
 
-QueueStatus Queue_Dequeue( Queue *queue, int *value ){
+QueueStatus Queue_Dequeue( Queue *queue, void* value ){
     QueueStatus status = QUEUE_OK;
 
     _Queue_checkStatus( queue );
 
     if( queue->status != QUEUE_EMPTY ){
-        *value = queue->array[queue->tail++];
+        memcpy(value,
+               queue->array + (queue->elementSize * queue->tail++),
+               queue->elementSize);
         queue->status = QUEUE_OK;
     }
     else{
-        status = QUEUE_ERROR;
+        status = QUEUE_EMPTY;
         queue->status = QUEUE_EMPTY;
     }
 
     return status;
 }
 
+void Queue_Flush( Queue *queue ){
+    queue->head = 0;
+    queue->tail = 0;
+    queue->status = QUEUE_EMPTY;
+
+}
 
 void _Queue_checkStatus( Queue *queue ){
     if( queue->head == queue->tail ){

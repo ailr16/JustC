@@ -21,6 +21,7 @@ enable_testing()
 add_executable(unitTests
     dataStructures/TEST__stack.cpp
     dataStructures/TEST__rbuffer.cpp
+    dataStructures/TEST__queue.cpp
 )
 
 target_link_libraries(
@@ -30,6 +31,7 @@ target_link_libraries(
         gmock
         stack_lib
         rbuffer_lib
+        queue_lib
 )
 
 target_include_directories(
