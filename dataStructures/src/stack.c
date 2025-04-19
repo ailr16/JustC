@@ -11,10 +11,11 @@ StackStatus _Stack_checkStatus( Stack *stackHandler ){
     return stackHandler->status;
 }
 
-StackStatus Stack_init( Stack *stackHandler, int stackSize ){
+StackStatus Stack_init( Stack *stackHandler, int stackSize, int elementSize ){
     stackHandler->size = stackSize - 1;
+    stackHandler->elementSize = elementSize;
 
-    stackHandler->array = (int*)malloc( stackSize*(sizeof(int)) );
+    stackHandler->array = (void*)malloc( stackSize*elementSize );
     if( stackHandler->array == NULL ){
         stackHandler->status = STACK_ERROR;
         return STACK_ERROR;
@@ -31,21 +32,26 @@ void Stack_destroy( Stack *stackHandler ){
     stackHandler->status = STACK_EMPTY;
 }
 
-StackStatus Stack_push( Stack *stackHandler, int data ){
-    if( _Stack_checkStatus( stackHandler ) == STACK_FULL ) return STACK_FULL;
-
+StackStatus Stack_push( Stack *stackHandler, void* data ){
+    if( _Stack_checkStatus( stackHandler ) == STACK_FULL )
+        return STACK_FULL;
+    
     stackHandler->pointer++;
-    stackHandler->array[stackHandler->pointer] = data;
+    memcpy(stackHandler->array + (stackHandler->pointer * stackHandler->elementSize),
+           data,
+           stackHandler->elementSize);
+
     _Stack_checkStatus( stackHandler );
 
     return STACK_OK;
 }
 
-StackStatus Stack_pop( Stack *stackHandler, int *data ){
+StackStatus Stack_pop( Stack *stackHandler, void* data ){
     if( _Stack_checkStatus( stackHandler ) == STACK_EMPTY ) return STACK_EMPTY;
 
-    *data = stackHandler->array[stackHandler->pointer];
-    stackHandler->array[stackHandler->pointer] = 0;
+    memcpy(data,
+           stackHandler->array + (stackHandler->pointer * stackHandler->elementSize),
+           stackHandler->elementSize);
     stackHandler->pointer--;
 
     _Stack_checkStatus( stackHandler );

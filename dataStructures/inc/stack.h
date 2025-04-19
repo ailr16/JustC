@@ -7,6 +7,7 @@ extern "C" {
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 typedef enum _StackStatus{
     STACK_OK    = 0,
@@ -17,15 +18,16 @@ typedef enum _StackStatus{
 
 typedef struct _Stack{
     int size;
-    int *array;
+    int elementSize;
+    void *array;
     int pointer;
     StackStatus status;
 } Stack;
 
-StackStatus Stack_init( Stack *stackHandler, int stackSize );
+StackStatus Stack_init( Stack *stackHandler, int stackSize, int elementSize );
 void Stack_destroy( Stack *stackHandler );
-StackStatus Stack_push( Stack *stackHandler, int data );
-StackStatus Stack_pop( Stack *stackHandler, int *data );
+StackStatus Stack_push( Stack *stackHandler, void* data );
+StackStatus Stack_pop( Stack *stackHandler, void* data );
 
 #ifdef __cplusplus
 }
