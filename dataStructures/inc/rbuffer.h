@@ -1,6 +1,10 @@
 #ifndef RBUFFER_H
 #define RBUFFER_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -28,4 +32,9 @@ RbufferStatus Rbuffer_getStatus( Rbuffer *buffer );
 RbufferStatus Rbuffer_flush( Rbuffer *buffer );
 
 void Rbuffer_print( Rbuffer *buffer );
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

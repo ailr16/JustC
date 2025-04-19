@@ -20,6 +20,7 @@ enable_testing()
 # Tests definition
 add_executable(unitTests
     dataStructures/TEST__stack.cpp
+    dataStructures/TEST__rbuffer.cpp
 )
 
 target_link_libraries(
@@ -28,6 +29,7 @@ target_link_libraries(
         GTest::GTest
         gmock
         stack_lib
+        rbuffer_lib
 )
 
 target_include_directories(
