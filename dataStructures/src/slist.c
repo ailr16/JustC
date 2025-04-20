@@ -11,8 +11,9 @@ PSlistStatus _Slist_checkStatus( Slist *listHandler );
 /*
   Initialize list
 */
-SlistStatus Slist_init(Slist *listHandler){
+SlistStatus Slist_init(Slist *listHandler, int dataSize){
     listHandler->head = NULL;
+    listHandler->dataSize = dataSize;
 
     return SLIST_OK;
 }
@@ -20,7 +21,7 @@ SlistStatus Slist_init(Slist *listHandler){
 /*
   Add node at the specified index
 */
-SlistStatus Slist_insert(Slist *listHandler, int index, int data){
+SlistStatus Slist_insert(Slist *listHandler, int index, void *data){
     SlistNode *temp;
     SlistNode *new;
     
@@ -28,9 +29,11 @@ SlistStatus Slist_insert(Slist *listHandler, int index, int data){
 
     if( (_Slist_checkStatus( listHandler ) == SLIST_EMPTY) ){
         new = (SlistNode*)malloc( sizeof(SlistNode) );
-        if( new == NULL ) return SLIST_ERROR;
+        if( new == NULL )
+            return SLIST_ERROR;
 
-        new->data = data;
+        new->data = malloc(listHandler->dataSize);
+        memcpy(new->data, data, listHandler->dataSize);
         new->next = NULL;
 
         listHandler->head = new;
@@ -45,7 +48,8 @@ SlistStatus Slist_insert(Slist *listHandler, int index, int data){
         new = (SlistNode*)malloc( sizeof(SlistNode) );
         if( new == NULL ) return SLIST_ERROR;
 
-        new->data = data;
+        new->data = malloc(listHandler->dataSize);
+        memcpy(new->data, data, listHandler->dataSize);
         new->next = temp;
 
         listHandler->head = new;
@@ -63,7 +67,8 @@ SlistStatus Slist_insert(Slist *listHandler, int index, int data){
         new = (SlistNode*)malloc( sizeof(SlistNode) );
         if( new == NULL ) return SLIST_ERROR;
 
-        new->data = data;
+        new->data = malloc(listHandler->dataSize);
+        memcpy(new->data, data, listHandler->dataSize);
         new->next = NULL;
 
         temp->next = new;
@@ -84,7 +89,8 @@ SlistStatus Slist_insert(Slist *listHandler, int index, int data){
         new = (SlistNode*)malloc( sizeof(SlistNode) );
         if( new == NULL ) return SLIST_ERROR;
 
-        new->data = data;
+        new->data = malloc(listHandler->dataSize);
+        memcpy(new->data, data, listHandler->dataSize);
         new->next = temp->next;
 
         temp->next = new;
@@ -106,6 +112,7 @@ SlistStatus Slist_remove(Slist *listHandler, int index){
         temp = listHandler->head;
         listHandler->head = NULL;
 
+        free( temp->data );
         free( temp );
         return SLIST_OK;
     }
@@ -115,6 +122,7 @@ SlistStatus Slist_remove(Slist *listHandler, int index){
         temp = listHandler->head;
         listHandler->head = temp->next;
 
+        free( temp->data );
         free(temp);
 
         return SLIST_OK;
@@ -129,6 +137,7 @@ SlistStatus Slist_remove(Slist *listHandler, int index){
         old = temp->next;
         temp->next = NULL;
 
+        free(old->data);
         free(old);
 
         return SLIST_OK;
@@ -147,6 +156,7 @@ SlistStatus Slist_remove(Slist *listHandler, int index){
         old = temp->next;
         temp->next = old->next;
 
+        free(old->data);
         free(old);
 
         return SLIST_OK;
@@ -156,19 +166,19 @@ SlistStatus Slist_remove(Slist *listHandler, int index){
 /*
   Remove the specified index node
 */
-SlistStatus Slist_getIndex( Slist *listHandler, int index, int *data ){
+SlistStatus Slist_getIndex( Slist *listHandler, int index, void *data ){
     SlistNode *temp;
 
     if( _Slist_checkStatus( listHandler ) == SLIST_EMPTY ) return SLIST_ERROR;
     if( index < -1 ) return SLIST_ERROR;
 
     if( _Slist_checkStatus( listHandler ) == SLIST_1ITEM ){
-        *data = listHandler->head->data;
+        memcpy(data, listHandler->head->data, listHandler->dataSize);
         return SLIST_OK;
     }
 
     if( index == 0 ){
-        *data = listHandler->head->data;
+        memcpy(data, listHandler->head->data, listHandler->dataSize);
         return SLIST_OK;
     }
     else if( index == -1 ){
@@ -176,7 +186,7 @@ SlistStatus Slist_getIndex( Slist *listHandler, int index, int *data ){
         while( temp->next != NULL ){
             temp = temp->next;
         }
-        *data = temp->data;
+        memcpy(data, temp->data, listHandler->dataSize);
 
         return SLIST_OK;
     }
@@ -189,24 +199,10 @@ SlistStatus Slist_getIndex( Slist *listHandler, int index, int *data ){
             if( count >= index + 1 ) break;
             temp = temp->next;
         }
-        *data = temp->data;
+        memcpy(data, temp->data, listHandler->dataSize);
 
         return SLIST_OK;
     }
-}
-
-/*
-  Print all the nodes in a list
-*/
-void Slist_print( Slist *listHandler ){
-    SlistNode *i = listHandler->head;
-
-    printf("[ ");
-    while(i != NULL){
-        printf(" %d ", i->data);
-        i = i->next;
-    }
-    printf(" ]\n");
 }
 
 /*
@@ -218,6 +214,7 @@ void Slist_free(Slist *listHandler){
     while(listHandler->head != NULL){
         tmp = listHandler->head;
         listHandler->head = listHandler->head->next;
+        free(tmp->data);
         free(tmp);
     }
 }
