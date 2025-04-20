@@ -13,14 +13,15 @@ PDlistStatus _Dlist_checkStatus( Dlist *listHandler ){
 /*
   Initialize list
 */
-void Dlist_init(Dlist *listHandler){
+void Dlist_init(Dlist *listHandler, int dataSize){
     listHandler->head = NULL;
+	listHandler->dataSize = dataSize;
 }
 
 /*
   Insert node at specified index 
 */
-DlistStatus Dlist_insert(Dlist *listHandler, int index, int data){
+DlistStatus Dlist_insert(Dlist *listHandler, int index, void* data){
     DlistNode *temp;
 	DlistNode *new;
 
@@ -30,7 +31,8 @@ DlistStatus Dlist_insert(Dlist *listHandler, int index, int data){
 		new = (DlistNode*)malloc( sizeof( DlistNode ) );
 		if( new == NULL ) return DLIST_ERROR;
 
-		new->data = data;
+		new->data = malloc(listHandler->dataSize);
+		memcpy(new->data, data, listHandler->dataSize);
 		new->prev = NULL;
 		new->next = NULL;
 
@@ -45,7 +47,8 @@ DlistStatus Dlist_insert(Dlist *listHandler, int index, int data){
 		new = (DlistNode*)malloc( sizeof( DlistNode ) );
 		if( new == NULL ) return DLIST_ERROR;
 
-		new->data = data;
+		new->data = malloc(listHandler->dataSize);
+		memcpy(new->data, data, listHandler->dataSize);
 		new->prev = NULL;
 		new->next = temp;
 
@@ -67,7 +70,8 @@ DlistStatus Dlist_insert(Dlist *listHandler, int index, int data){
 
 		temp->next = new;
 
-		new->data = data;
+		new->data = malloc(listHandler->dataSize);
+		memcpy(new->data, data, listHandler->dataSize);
 		new->next = NULL;
 		new->prev = temp;
 
@@ -88,7 +92,8 @@ DlistStatus Dlist_insert(Dlist *listHandler, int index, int data){
 		new = (DlistNode*)malloc( sizeof( DlistNode ) );
 		if( new == NULL ) return DLIST_ERROR;
 
-		new->data = data;
+		new->data = malloc(listHandler->dataSize);
+		memcpy(new->data, data, listHandler->dataSize);
 		new->next = temp->next;
 		new->prev = temp;
 
@@ -102,7 +107,7 @@ DlistStatus Dlist_insert(Dlist *listHandler, int index, int data){
 /*
   Remove specified node index 
 */
-DlistStatus Dlist_remove(Dlist *listHandler, int index, int *data){
+DlistStatus Dlist_remove(Dlist *listHandler, int index, void* data){
 	DlistNode *temp;
 	DlistNode *old;
 
@@ -115,6 +120,7 @@ DlistStatus Dlist_remove(Dlist *listHandler, int index, int *data){
 
 		listHandler->head = NULL;
 
+		free(old->data);
 		free(old);
 
 		return DLIST_OK;
@@ -124,9 +130,10 @@ DlistStatus Dlist_remove(Dlist *listHandler, int index, int *data){
 		old = listHandler->head;
 		listHandler->head = old->next;
 
-		*data = old->data;
+		memcpy(data, old->data, listHandler->dataSize);
 
 		old->next->prev = NULL;
+		free(old->data);
 		free(old);
 
 		return DLIST_OK;
@@ -138,8 +145,10 @@ DlistStatus Dlist_remove(Dlist *listHandler, int index, int *data){
 			temp = temp->next;
 		}
 		temp->prev->next = NULL;
-		*data = temp->data;
 
+		memcpy(data, temp->data, listHandler->dataSize);
+
+		free(temp->data);
 		free(temp);
 	}
 	else{
@@ -159,27 +168,13 @@ DlistStatus Dlist_remove(Dlist *listHandler, int index, int *data){
 
 		temp->next = old->next;
 		old->next->prev = old->prev;
-		*data = old->data;
+		
+		memcpy(data, old->data, listHandler->dataSize);
+		free(old->data);
 		free( old );
 
 		return DLIST_OK;
 	}
-}
-
-/*
-  Printt all nodes in the list
-*/
-void Dlist_print(Dlist *listHandler){
-	DlistNode *temp;
-
-	temp = listHandler->head;
-
-	printf("[ ");
-	while(temp){
-		printf("%d ", temp->data );
-		temp = temp->next;
-	}
-	printf("]\n");
 }
 
 /*
@@ -191,6 +186,7 @@ void Dlist_free(Dlist *listHandler){
 	while(listHandler->head){
 		temp = listHandler->head;
 		listHandler->head = listHandler->head->next;
+		free(temp->data);
 		free(temp);
 	}
 }

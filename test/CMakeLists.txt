@@ -23,6 +23,7 @@ add_executable(unitTests
     dataStructures/TEST__rbuffer.cpp
     dataStructures/TEST__queue.cpp
     dataStructures/TEST__slist.cpp
+    dataStructures/TEST__dlist.cpp
 )
 
 target_link_libraries(
@@ -34,6 +35,7 @@ target_link_libraries(
         rbuffer_lib
         queue_lib
         slist_lib
+        dlist_lib
 )
 
 target_include_directories(
