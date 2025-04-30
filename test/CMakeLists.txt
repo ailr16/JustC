@@ -24,6 +24,7 @@ add_executable(unitTests
     dataStructures/TEST__queue.cpp
     dataStructures/TEST__slist.cpp
     dataStructures/TEST__dlist.cpp
+    custom_libc/TEST__custom_string.cpp
 )
 
 target_link_libraries(
@@ -36,12 +37,14 @@ target_link_libraries(
         queue_lib
         slist_lib
         dlist_lib
+        customString_lib
 )
 
 target_include_directories(
     unitTests
     PRIVATE
         ../dataStructures/inc
+        ../custom_libc/inc
 )
 
 add_test(NAME    test
