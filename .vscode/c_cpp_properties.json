@@ -8,7 +8,8 @@
                 "${workspaceFolder}/dataStructures/**",
                 "${workspaceFolder}/games/**",
                 "${workspaceFolder}/test/**",
-                "${workspaceFolder}/build/_deps/googletest-src/googletest/**"
+                "${workspaceFolder}/build/_deps/googletest-src/googletest/**",
+                "${workspaceFolder}/utils/inc"
             ],
             "intelliSenseMode": "linux-gcc-x64",
             "compilerPath": "/usr/bin/gcc",
